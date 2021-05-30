@@ -5,6 +5,10 @@
   "description": "",
   "main": "lib",
   "types": "typings/index.d.ts",
+  "files": [
+    "lib",
+    "typings"
+  ],
   "repository": {
     "type": "https",
     "url": "https://github.com/<%= pkg.git_path %>/tree/master/<%= pkg.mono_path %>"

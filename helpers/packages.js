@@ -1,12 +1,12 @@
 module.exports = [
     {
-        name: 'common',
-        _dirname: 'common',
+        name: 'knex',
+        _dirname: 'knex',
     },
     /* internal module :start */
     {
-        name: 'imodule-foo',
-        _dirname: 'imodule-foo',
+        name: 'orm-core',
+        _dirname: 'orm-core',
     },
     /* internal module :end */
 ]

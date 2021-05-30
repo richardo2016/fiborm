@@ -8,18 +8,7 @@ ssl.loadRootCerts()
 
 const monoInfo = require('../helpers/monoInfo');
 const SCOPE_PREFIX = monoInfo.scopePrefix;
-
-const mkdirp = function (inputp) {
-    try {
-        if (!fs.exists(inputp))
-            fs.mkdir(inputp);
-    } catch (e) {
-        mkdirp(path.dirname(inputp));
-        try {
-            fs.mkdir(inputp);
-        } catch (e) {}
-    }
-}
+const { mkdirp } = require('../helpers/fs');
 
 const PROJ_ROOT = path.resolve(__dirname, '../');
 const hc = new http.Client();
@@ -36,17 +25,18 @@ const docs = [
     // standalone packages
     ...[
         {
-            ofpackage: 'foo',
-            gitpath: 'sindresorhus/cli-spinners',
+            ofpackage: 'knex',
+            gitpath: 'knex/knex',
             isStandalone: true,
+            README: 'README'
         },
     ],
     ...[
-        {
-            ofpackage: 'subfoo',
-            gitpath: 'sindresorhus/ansi-escapes',
-            exportedName: 'ansiEscapes',
-        },
+        // {
+        //     ofpackage: 'subfoo',
+        //     gitpath: 'sindresorhus/ansi-escapes',
+        //     exportedName: 'ansiEscapes',
+        // },
     ],
 ];
 
@@ -133,10 +123,11 @@ docs.forEach(({
     ofpackage,
     gitpath,
     exportedName,
-    isStandalone
+    isStandalone,
+    readmeurl: _readmeurl
 }) => {
     const [, name] = gitpath.split('/');
-    const readmeurl = `https://raw.githubusercontent.com/${gitpath}/main/readme.md`;
+    const readmeurl = _readmeurl || `https://raw.githubusercontent.com/${gitpath}/master/README.md`;
     const gitrepourl = `https://github.com/${gitpath}`;
 
     const readmeTarget = path.resolve(PROJ_ROOT, `./packages/${ofpackage}/${isStandalone ? 'README.md' : `README/${name}.md`}`);

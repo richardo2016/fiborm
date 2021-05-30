@@ -1,5 +1,5 @@
 {
-	"name": "@fibjs-mono-group/common",
+	"name": "@fiborm/knex",
 	"version": "0.1.0",
 	"private": false,
 	"description": "",
@@ -7,9 +7,9 @@
 	"types": "typings/index.d.ts",
 	"repository": {
 		"type": "https",
-		"url": "https://github.com/fibjs-mono-group/repo_name/tree/master/packages/common"
+		"url": "https://github.com/richardo2016/fiborm/tree/master/packages/knex"
 	},
-	"homepage": "https://github.com/fibjs-mono-group/repo_name/tree/master/packages/common",
+	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/knex",
 	"scripts": {
 		"build": "ftsc ./src/* --outDir ./lib",
 		"test": "fibjs test",
@@ -34,5 +34,9 @@
 			"0.30.0",
 			"0.31.0"
 		]
-	}
+	},
+	"files": [
+		"lib",
+		"typings"
+	]
 }

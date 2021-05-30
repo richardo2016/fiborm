@@ -1,12 +1,6 @@
 const test = require('test');
 test.setup();
 
-const Mod = require('../')
-
-describe("FxLib", () => {
-    it("basic", () => {
-        assert.ok(Mod.default === null)
-    });
-});
+require('./reactivity');
 
 test.run(console.DEBUG);

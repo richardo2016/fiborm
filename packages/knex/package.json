@@ -38,5 +38,10 @@
 	"files": [
 		"lib",
 		"typings"
-	]
+	],
+	"dependencies": {
+		"@types/lodash.merge": "^4.6.6",
+		"@vue/reactivity": "^3.0.11",
+		"lodash.merge": "^4.6.2"
+	}
 }

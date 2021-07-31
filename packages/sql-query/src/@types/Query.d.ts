@@ -64,8 +64,3 @@ declare namespace FxSqlQuery {
 		Query: typeof FxSqlQuery.Class_Query
 	}
 }
-
-declare module "@fxjs/sql-query" {
-	var m: FxSqlQuery.ExportModule
-	export = m
-}

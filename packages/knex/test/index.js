@@ -1,12 +1,7 @@
-const test = require('test');
-test.setup();
+const test = require('test')
+test.setup()
 
-const Mod = require('../')
+require('./sqlite')
+require('./mysql')
 
-describe("FxLib", () => {
-    it("basic", () => {
-        assert.ok(Mod.default === null)
-    });
-});
-
-test.run(console.DEBUG);
+test.run(console.DEBUG)

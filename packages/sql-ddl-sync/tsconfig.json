@@ -17,6 +17,12 @@
         ],
         "typeRoots": [
             "typings/index.d.ts"
-        ]
-    }
+        ],
+        "allowJs": true,
+        "checkJs": false
+    },
+    "include": [
+        "./src/index.ts",
+        "./src/Dialects/index.ts"
+    ]
 }

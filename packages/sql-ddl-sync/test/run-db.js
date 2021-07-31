@@ -1,12 +1,12 @@
 const test = require('test')
 test.setup()
 
-var ORM     = require("@fiborm/orm");
+var DBDriver     = require("@fiborm/db-driver");
 var common  = require("./common");
 var url     = require("url");
 
 if (!process.env.URI) {
-	throw new Error('no URI provided');
+	throw new Error('no URI provided')
 }
 
 var uri = url.parse(process.env.URI, true);
@@ -18,22 +18,19 @@ if (!uri.protocol) {
 	)
 }
 
-ORM.connect(process.env.URI, function (err, db) {
-	if (err) throw err;
+common.dbdriver = DBDriver.create(process.env.URI);
+common.dialect = common.dbdriver.type;
+runTest();
 
-	common.driver = db.driver;
-	common.dialect = db.driver.dialect;
-
-	runTest();
-
-	db.closeSync();
-
-	process.exit(0);
-});
+process.exit(0);
 
 function runTest () {
 	require('./integration/db.callback')
 	require('./integration/db')
 
+	require('./integration/db.sync')
+
 	test.run(console.DEBUG)
+
+	common.dbdriver.close()
 }

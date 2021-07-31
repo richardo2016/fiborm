@@ -23,7 +23,7 @@
 	"author": "richardo2016 <richardo2016@gmail.com>",
 	"license": "ISC",
 	"devDependencies": {
-		"@fibjs/types": "^0.31.0",
+		"@fibjs/types": "^0.33.0",
 		"fib-pool": "^1.6.0",
 		"fib-typify": "^0.9.0"
 	},

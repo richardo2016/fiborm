@@ -99,6 +99,8 @@ packages.forEach(({
 
       output.version = existedTargetPkgJson.version || output.version
       output.description = existedTargetPkgJson.description || output.description
+      output.main = existedTargetPkgJson.main || output.main
+      output.types = existedTargetPkgJson.types || output.types
 
       output = prettyJson(
         Object.assign({}, existedTargetPkgJson, output)

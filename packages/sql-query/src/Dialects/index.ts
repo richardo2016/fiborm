@@ -2,8 +2,8 @@ import * as mysql from './mysql'
 export { mysql }
 
 // @ts-ignore
-import * as postgresql from './postgresql'
-export { postgresql }
+import * as _postgresql from './postgresql'
+export const postgresql = _postgresql as any as FxSqlQueryDialect.Dialect;
 
 import * as sqlite from './sqlite'
 export { sqlite }

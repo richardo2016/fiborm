@@ -16,7 +16,7 @@
 	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/db-driver",
 	"scripts": {
 		"build": "ftsc ./src/* --outDir ./lib",
-		"test": "fibjs test",
+		"test": "fibjs test/run",
 		"ci": "npm run build && npm run test",
 		"prepublishOnly": "npm run ci"
 	},

@@ -7,7 +7,7 @@ require('./integration/sqlite')
 require('./integration/mysql')
 require('./integration/redis')
 
-// if (process.env.URI)
-//     require('./run-db')
+if (process.env.URI)
+    require('./run-db')
 
 test.run(console.DEBUG)

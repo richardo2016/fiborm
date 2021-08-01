@@ -1,7 +1,7 @@
 var common  = require("../common");
 var Driver = require("../..").getDriver('mysql');
 
-describe("MySQL", function () {
+process.env.CI_MYSQL_URL && describe("MySQL", function () {
 	var driver
 	var knex
 	var DBNAME = 'fxjs-db-driver-test';

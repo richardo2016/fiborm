@@ -1,7 +1,7 @@
 var common  = require("../common");
 var Driver = require("../..").getDriver('sqlite');
 
-process.env.DBDRIVER_TEST_REDIS && describe("Redis", function () {
+process.env.CI_REDIS_URL && describe("Redis", function () {
 	var driver;
 
 	var setup = function () {

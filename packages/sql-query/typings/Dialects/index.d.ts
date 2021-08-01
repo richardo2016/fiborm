@@ -1,7 +1,6 @@
 import * as mysql from './mysql';
 export { mysql };
-import * as postgresql from './postgresql';
-export { postgresql };
+export declare const postgresql: FxSqlQueryDialect.Dialect;
 import * as sqlite from './sqlite';
 export { sqlite };
 import * as mssql from './mssql';

@@ -16,9 +16,9 @@
 	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/sql-query",
 	"scripts": {
 		"build": "ftsc ./src/* --outDir ./lib",
-		"test": "fibjs test",
+		"test": "fibjs test/run",
 		"ci": "npm run build && npm run test",
-		"prepublishOnly": "npm run ci"
+		"prepublishOnly": "npm run build"
 	},
 	"author": "richardo2016 <richardo2016@gmail.com>",
 	"license": "ISC",

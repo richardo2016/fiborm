@@ -1,0 +1,10 @@
+import type { FxOrmModel } from '../../@types/model';
+declare const _default: (this: FxOrmModel.Class_Model, model: FxOrmModel.Class_Model, opts?: {
+    as?: string;
+    collection?: string;
+    joinNodeSource?: string;
+    sourceForJoin?: string;
+    joinNodeTarget?: string;
+    targetForJoin?: string;
+}) => FxOrmModel.Class_MergeModel;
+export = _default;

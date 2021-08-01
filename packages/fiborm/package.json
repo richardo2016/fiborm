@@ -16,16 +16,36 @@
 	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/fiborm",
 	"scripts": {
 		"build": "ftsc ./src/* --outDir ./lib",
-		"test": "fibjs test",
-		"ci": "npm run build && npm run test",
+        "build2": "fib-typify src -o lib",
+        "test": "rm -rf fibjs-*.log && fibjs --prof --prof-interval=10 test",
+        "prof": "fibjs --prof-process fibjs-*.log fibjsprof.svg",
+        "ci": "npm run ci-sqlite",
+        "ci-mysql": "npm run build && cross-env ORM_PROTOCOL=mysql npm run test",
+        "ci-sqlite": "npm run build && cross-env ORM_PROTOCOL=sqlite npm run test",
+        "ci-mongodb": "npm run build && cross-env ORM_PROTOCOL=mongodb npm run test",
 		"prepublishOnly": "npm run ci"
 	},
 	"author": "richardo2016 <richardo2016@gmail.com>",
 	"license": "ISC",
+    "dependencies": {
+        "@fibjs/chalk": "^1.0.0",
+        "@fibjs/enforce": "^0.1.1",
+        "@fiborm/db-driver": "^0.1.0",
+        "@fiborm/knex": "^0.1.0",
+        "@fiborm/orm-core": "^0.1.0",
+        "@fiborm/orm-hql": "^0.1.0",
+        "@fiborm/sql-ddl-sync": "^0.1.0",
+        "@fiborm/sql-query": "^0.1.0",
+        "knex": "^0.19.5",
+        "reflect-metadata": "^0.1.13"
+    },
 	"devDependencies": {
 		"@fibjs/types": "^0.33.0",
+        "cross-env": "^5.2.0",
 		"fib-pool": "^1.6.0",
-		"fib-typify": "^0.9.0"
+		"fib-typify": "^0.9.0",
+        "lodash": "^4.17.11",
+        "semver": "^5.6.0"
 	},
 	"publishConfig": {
 		"access": "public"

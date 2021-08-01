@@ -1,5 +1,6 @@
 import SqlQuery = require('@fiborm/sql-query');
 
+import type { FxSqlQuery } from '@fiborm/sql-query';
 import type { FxOrmDXL } from '../@types/DXL';
 import type { FxOrmTypeHelpers } from '../@types/_common';
 

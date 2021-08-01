@@ -1,5 +1,6 @@
 /// <reference types="@fibjs/types" />
-import type { KnexInstance } from "../../../knex/typings";
+import type { FxSqlQuery } from '@fiborm/sql-query';
+import type { KnexInstance } from "@fiborm/knex";
 import type { FxOrmDDL } from "./DDL";
 import type { FxOrmDML } from "./DML";
 import type { FxOrmDXL } from "./DXL";

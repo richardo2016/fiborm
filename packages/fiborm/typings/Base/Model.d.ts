@@ -1,4 +1,5 @@
 /// <reference types="@fibjs/types" />
+import type { FxSqlQuery } from '@fiborm/sql-query';
 import Class_QueryBuilder from './QueryBuilder';
 import Property from './Property';
 import type { FxOrmProperty } from '../@types/property';

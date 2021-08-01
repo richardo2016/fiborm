@@ -1,7 +1,7 @@
 import { FxSqlQuery } from "./Query";
 import { FxSqlQuerySql } from "./Sql";
 export declare namespace FxSqlQueryDialect {
-    type DialectType = 'mysql' | 'mssql' | 'sqlite';
+    type DialectType = 'mysql' | 'mssql' | 'sqlite' | 'postgresql';
     interface DataTypesDescriptorBase {
         id: string;
         int: string;

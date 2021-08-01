@@ -1,5 +1,7 @@
 import DDLSync = require('@fiborm/sql-ddl-sync');
 
+import type { FxSqlQuery } from '@fiborm/sql-query';
+
 import Class_QueryBuilder from './QueryBuilder';
 import Instance from './Instance';
 

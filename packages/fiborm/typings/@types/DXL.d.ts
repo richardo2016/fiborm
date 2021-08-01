@@ -1,4 +1,5 @@
 import type { FxDbDriverNS } from "@fiborm/db-driver";
+import type { FxSqlQuery, FxSqlQueryDialect } from '@fiborm/sql-query';
 export declare namespace FxOrmDXL {
     interface OptionsCommon<ConnType = any> {
         connection?: FxDbDriverNS.Driver<ConnType>['connection'];

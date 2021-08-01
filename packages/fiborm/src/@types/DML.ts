@@ -1,4 +1,6 @@
 import type { KnexInstance } from '@fiborm/knex'
+import type { FxSqlQuerySql } from '@fiborm/sql-query';
+
 import type { FxOrmDXL } from './DXL';
 import type { FxOrmProperty } from './property';
 import type { FxOrmQueries } from './Queries';

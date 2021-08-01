@@ -1,4 +1,5 @@
 import type { FxDbDriverNS } from '@fiborm/db-driver';
+import type { FxSqlQuery } from '@fiborm/sql-query';
 import type { FxOrmDDL } from '../../@types/DDL';
 import type { FxOrmTypeHelpers } from '../../@types/_common';
 

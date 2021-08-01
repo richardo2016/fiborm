@@ -1,6 +1,6 @@
-/// <reference types="@fiborm/sql-query" />
+import type { FxSqlQuery } from '@fiborm/sql-query';
+import type { KnexInstance } from "@fiborm/knex";
 
-import type { KnexInstance } from "../../../knex/typings"
 import type { FxOrmDDL } from "./DDL"
 import type { FxOrmDML } from "./DML"
 import type { FxOrmDXL } from "./DXL"

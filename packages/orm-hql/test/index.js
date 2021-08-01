@@ -1,12 +1,7 @@
 const test = require('test');
 test.setup();
 
-const Mod = require('../')
-
-describe("FxLib", () => {
-    it("basic", () => {
-        assert.ok(Mod.default === null)
-    });
-});
+require('./integration/parser');
+require('./integration/use-js-api');
 
 test.run(console.DEBUG);

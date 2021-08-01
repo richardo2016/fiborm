@@ -15,9 +15,11 @@
 	},
 	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/orm-hql",
 	"scripts": {
-		"build": "ftsc ./src/* --outDir ./lib",
+		"compile": "fibjs ./build-ne.js",
+		"prebuild": "fibjs build-ne.js",
+		"build": "fib-typify ./src -o ./lib",
 		"test": "fibjs test",
-		"ci": "npm run build && npm run test",
+		"ci": "npm run build && npm run compile && npm run test",
 		"prepublishOnly": "npm run ci"
 	},
 	"author": "richardo2016 <richardo2016@gmail.com>",
@@ -35,5 +37,9 @@
 		"version": [
 			"0.33.0"
 		]
+	},
+	"dependencies": {
+		"@types/nearley": "^2.11.2",
+		"nearley": "^2.20.1"
 	}
 }

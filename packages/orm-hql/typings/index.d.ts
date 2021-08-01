@@ -1,2 +1,4 @@
-declare const _default: any;
-export default _default;
+/// <reference types="@fibjs/types" />
+/// <reference path="type.d.ts" />
+
+export = FxHQL.Parser

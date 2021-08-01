@@ -46,7 +46,7 @@ common.Remove = function (qOpts) {
 };
 
 common.getDialect = function (dialect) {
-	return require('../lib/Dialects/' + dialect);
+	return Query.Dialects[dialect];
 };
 
 common.getProtocol = function () {

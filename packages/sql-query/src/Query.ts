@@ -14,8 +14,9 @@ import { RemoveQuery } from "./Remove";
 import ComparatorsHash 	= require("./Comparators");
 export import Helpers     		= require('./Helpers');
 export import Dialects 		= require('./Dialects')
-import { FxSqlQuery } from './Typo/Query';
-import { FxSqlQueryDialect } from './Typo/Dialect';
+
+import type { FxSqlQuery } from './Typo/Query';
+import type { FxSqlQueryDialect } from './Typo/Dialect';
 
 export const comparators = ComparatorsHash;
 export const Text: FxSqlQuery.TypedQueryObjectWrapper<"text"> = buildQueryType<"text">("text");

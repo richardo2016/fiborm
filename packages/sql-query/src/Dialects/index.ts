@@ -2,7 +2,8 @@ import * as mysql from './mysql'
 export { mysql }
 
 // const postgresql = require('./postgresql')
-// export { postgresql }
+import postgresql = require('./postgresql')
+export { postgresql }
 
 import * as sqlite from './sqlite'
 export { sqlite }

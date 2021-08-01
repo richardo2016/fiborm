@@ -6,8 +6,8 @@ import { UpdateQuery } from "./Update";
 import { RemoveQuery } from "./Remove";
 export import Helpers = require('./Helpers');
 export import Dialects = require('./Dialects');
-import { FxSqlQuery } from './Typo/Query';
-import { FxSqlQueryDialect } from './Typo/Dialect';
+import type { FxSqlQuery } from './Typo/Query';
+import type { FxSqlQueryDialect } from './Typo/Dialect';
 export declare const comparators: import("./Typo").FxSqlQueryComparator.ComparatorHash;
 export declare const Text: FxSqlQuery.TypedQueryObjectWrapper<"text">;
 export declare class Query implements FxSqlQuery.Class_Query {

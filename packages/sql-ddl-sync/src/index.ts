@@ -6,18 +6,28 @@ import util  = require('util')
 
 import { getSqlQueryDialect, logJson, getCollectionMapsTo_PropertyNameDict, filterPropertyDefaultValue, filterSyncStrategy, filterSuppressColumnDrop } from './Utils';
 
-import { FxOrmSqlDDLSync } from "./@types";
-import { FxOrmSqlDDLSync__Collection } from "./@types/Collection";
-import { FxOrmSqlDDLSync__Column } from "./@types/Column";
-import { FxOrmSqlDDLSync__Dialect } from "./@types/Dialect";
-import { FxOrmSqlDDLSync__Driver } from "./@types/Driver";
-import { FxOrmSqlDDLSync__DbIndex } from "./@types/DbIndex";
+import type { FibOrmSqlDDLSync } from "./@types";
+import type { FibOrmSqlDDLSync__Collection } from "./@types/Collection";
+import type { FibOrmSqlDDLSync__Column } from "./@types/Column";
+import type { FibOrmSqlDDLSync__Dialect } from "./@types/Dialect";
+import type { FibOrmSqlDDLSync__Driver } from "./@types/Driver";
+import type { FibOrmSqlDDLSync__DbIndex } from "./@types/DbIndex";
+
+export {
+	FibOrmSqlDDLSync,
+	FibOrmSqlDDLSync__Collection,
+	FibOrmSqlDDLSync__Column,
+	FibOrmSqlDDLSync__Dialect,
+	FibOrmSqlDDLSync__Driver,
+	FibOrmSqlDDLSync__DbIndex,
+}
 
 export import Dialects = require('./Dialects');
 
+
 const noOp = () => {};
 
-export const dialect: FxOrmSqlDDLSync.ExportModule['dialect'] = function (name) {
+export const dialect: FibOrmSqlDDLSync.ExportModule['dialect'] = function (name) {
 	if (!Dialects[name])
 		throw new Error(`no dialect with name '${name}'`)
 		
@@ -32,10 +42,10 @@ export const dialect: FxOrmSqlDDLSync.ExportModule['dialect'] = function (name) 
  */
 function processCollection (
 	syncInstnace: Sync,
-	collection: FxOrmSqlDDLSync__Collection.Collection,
+	collection: FibOrmSqlDDLSync__Collection.Collection,
 	opts?: {
 		force_sync?: boolean,
-		strategy?: FxOrmSqlDDLSync.SyncCollectionOptions['strategy']
+		strategy?: FibOrmSqlDDLSync.SyncCollectionOptions['strategy']
 	}
 ) {
 	let has: boolean;
@@ -70,8 +80,8 @@ function processCollection (
  * @param prop column's property
  */
 function getIndexName (
-	collection: FxOrmSqlDDLSync__Collection.Collection,
-	prop: FxOrmSqlDDLSync__Column.Property,
+	collection: FibOrmSqlDDLSync__Collection.Collection,
+	prop: FibOrmSqlDDLSync__Column.Property,
 	dialect_type: string
 ) {
 	const post = prop.unique ? 'unique' : 'index';
@@ -89,13 +99,13 @@ function getIndexName (
  */
 function getColumnTypeRaw (
 	syncInstance: Sync,
-	collection_name: FxOrmSqlDDLSync.TableName,
-	prop: FxOrmSqlDDLSync__Column.Property,
+	collection_name: FibOrmSqlDDLSync.TableName,
+	prop: FibOrmSqlDDLSync__Column.Property,
 	opts?: {
-		for?: FxOrmSqlDDLSync__Dialect.DielectGetTypeOpts['for']
+		for?: FibOrmSqlDDLSync__Dialect.DielectGetTypeOpts['for']
 	}
-): false | FxOrmSqlDDLSync__Dialect.DialectResult {
-	let type: false | string | FxOrmSqlDDLSync__Dialect.TypeResult;
+): false | FibOrmSqlDDLSync__Dialect.DialectResult {
+	let type: false | string | FibOrmSqlDDLSync__Dialect.TypeResult;
 
 	/**
 	 * get type, customTypes first
@@ -122,27 +132,27 @@ function getColumnTypeRaw (
 	};
 }
 
-export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
-	strategy: FxOrmSqlDDLSync.SyncCollectionOptions['strategy'] = 'soft'
+export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
+	strategy: FibOrmSqlDDLSync.SyncCollectionOptions['strategy'] = 'soft'
 	/**
 	 * @description total changes count in this time `Sync`
 	 * @deprecated
 	 */
-	total_changes: FxOrmSqlDDLSync.Sync['total_changes']
+	total_changes: FibOrmSqlDDLSync.Sync['total_changes']
 	
-	readonly collections: FxOrmSqlDDLSync__Collection.Collection[]
+	readonly collections: FibOrmSqlDDLSync__Collection.Collection[]
 
-	readonly dbdriver: FxOrmSqlDDLSync.Sync['dbdriver']
-	readonly Dialect: FxOrmSqlDDLSync.Sync['Dialect']
+	readonly dbdriver: FibOrmSqlDDLSync.Sync['dbdriver']
+	readonly Dialect: FibOrmSqlDDLSync.Sync['Dialect']
 	/**
 	 * @description customTypes
 	 */
-	readonly types: FxOrmSqlDDLSync.Sync['types']
+	readonly types: FibOrmSqlDDLSync.Sync['types']
 
 	private suppressColumnDrop: boolean
-	private debug: Exclude<FxOrmSqlDDLSync.SyncOptions['debug'], false>
+	private debug: Exclude<FibOrmSqlDDLSync.SyncOptions['debug'], false>
 
-	constructor (options: FxOrmSqlDDLSync.SyncOptions) {
+	constructor (options: FibOrmSqlDDLSync.SyncOptions) {
 		const dbdriver = options.dbdriver
 
 		this.suppressColumnDrop = filterSuppressColumnDrop(options.suppressColumnDrop !== false, dbdriver.type)
@@ -158,7 +168,7 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 
 	[sync_method: string]: any
 	
-	defineCollection (collection_name: string, properties: FxOrmSqlDDLSync__Collection.Collection['properties']) {
+	defineCollection (collection_name: string, properties: FibOrmSqlDDLSync__Collection.Collection['properties']) {
 		let idx = this.collections.findIndex(collection => collection.name === collection_name)
 		if (idx >= 0)
 			this.collections.splice(idx, 1)
@@ -171,23 +181,23 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 		return this;
 	}
 
-	findCollection (collection_name: string): null | FxOrmSqlDDLSync__Collection.Collection {
+	findCollection (collection_name: string): null | FibOrmSqlDDLSync__Collection.Collection {
 		return this.collections.find(collection => collection.name === collection_name) || null
 	}
 
-	defineType (type: string, proto: FxOrmSqlDDLSync__Driver.CustomPropertyType) {
+	defineType (type: string, proto: FibOrmSqlDDLSync__Driver.CustomPropertyType) {
 		this.types[type] = proto;
 		return this;
 	}
 
-	createCollection (collection: FxOrmSqlDDLSync__Collection.Collection) {
+	createCollection (collection: FibOrmSqlDDLSync__Collection.Collection) {
 		const columns: string[] = [];
 
 		let keys: string[] = [];
 
 		for (let k in collection.properties) {
-			let prop: FxOrmSqlDDLSync__Column.Property,
-				col: false | FxOrmSqlDDLSync__Dialect.DialectResult;
+			let prop: FibOrmSqlDDLSync__Column.Property,
+				col: false | FibOrmSqlDDLSync__Dialect.DialectResult;
 
 			prop = collection.properties[k];
 			prop.mapsTo = prop.mapsTo || k;
@@ -221,8 +231,8 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 	}
 
 	syncCollection (
-		_collection: string | FxOrmSqlDDLSync__Collection.Collection,
-		opts?: FxOrmSqlDDLSync.SyncCollectionOptions
+		_collection: string | FibOrmSqlDDLSync__Collection.Collection,
+		opts?: FibOrmSqlDDLSync.SyncCollectionOptions
 	) {
 		const collection = typeof _collection === 'string' ? this.findCollection(_collection) : _collection;
 
@@ -323,11 +333,11 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 	 * @param collection collection relation to find its indexes
 	 */
 	getCollectionIndexes (
-		collection: FxOrmSqlDDLSync__Collection.Collection
-	): FxOrmSqlDDLSync__DbIndex.DbIndexInfo[] {
-		let indexes: FxOrmSqlDDLSync__DbIndex.DbIndexInfo[] = [];
+		collection: FibOrmSqlDDLSync__Collection.Collection
+	): FibOrmSqlDDLSync__DbIndex.DbIndexInfo[] {
+		let indexes: FibOrmSqlDDLSync__DbIndex.DbIndexInfo[] = [];
 		let found: boolean,
-			prop: FxOrmSqlDDLSync__Column.Property;
+			prop: FibOrmSqlDDLSync__Column.Property;
 
 		for (let k in collection.properties) {
 			prop = collection.properties[k];
@@ -411,7 +421,7 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 
 	syncIndexes (
 		collection_name: string,
-		indexes: FxOrmSqlDDLSync__DbIndex.DbIndexInfo[]
+		indexes: FibOrmSqlDDLSync__DbIndex.DbIndexInfo[]
 	): void {
 		if (indexes.length == 0) return ;
 
@@ -447,8 +457,8 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 		}
 	}
 
-	sync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FxOrmSqlDDLSync.SyncResult>) {
-		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FxOrmSqlDDLSync.SyncResult>(
+	sync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
+		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FibOrmSqlDDLSync.SyncResult>(
 			() => {
 				this.total_changes = 0;
 				this.collections.forEach(collection => processCollection(this, collection, { strategy: this.strategy }))
@@ -463,8 +473,8 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 		return exposedErrResults.result;
 	};
 	
-	forceSync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FxOrmSqlDDLSync.SyncResult>) {
-		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FxOrmSqlDDLSync.SyncResult>(
+	forceSync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
+		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FibOrmSqlDDLSync.SyncResult>(
 			() => {
 				this.total_changes = 0;
 				this.collections.forEach(collection => processCollection(this, collection, { strategy: 'hard' }))
@@ -486,8 +496,8 @@ export class Sync<ConnType = any> implements FxOrmSqlDDLSync.Sync<ConnType> {
 	 * @param column column expected to be synced
 	 */
 	needDefinitionToColumn (
-		property: FxOrmSqlDDLSync__Column.Property,
-		column: FxOrmSqlDDLSync__Column.Property,
+		property: FibOrmSqlDDLSync__Column.Property,
+		column: FibOrmSqlDDLSync__Column.Property,
 		options?: {
 			collection?: string
 		}

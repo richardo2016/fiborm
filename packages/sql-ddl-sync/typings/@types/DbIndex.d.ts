@@ -1,4 +1,4 @@
-export declare namespace FxOrmSqlDDLSync__DbIndex {
+export declare namespace FibOrmSqlDDLSync__DbIndex {
     interface DbIndexInfo {
         name?: string;
         columns: string[];

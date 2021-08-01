@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="../@types/index.d.ts" />
 
 import nearley = require("nearley");
 const grammar: nearley.CompiledRules & nearley.Grammar = require("./sql-parser");

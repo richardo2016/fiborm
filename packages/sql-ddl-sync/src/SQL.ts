@@ -2,10 +2,10 @@ import { FxDbDriverNS } from '@fiborm/db-driver';
 
 import { getSqlQueryDialect } from './Utils';
 
-import type { FxOrmSqlDDLSync__SQL } from './@types/SQL';
+import type { FibOrmSqlDDLSync__SQL } from './@types/SQL';
 
 export function CREATE_TABLE (
-	options: FxOrmSqlDDLSync__SQL.TableOptions,
+	options: FibOrmSqlDDLSync__SQL.TableOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	let sql = "CREATE TABLE " + getSqlQueryDialect(db_type).escapeId(options.name) + " (" + options.columns.join(", ");
@@ -22,7 +22,7 @@ export function CREATE_TABLE (
 };
 
 export function DROP_TABLE (
-	options: FxOrmSqlDDLSync__SQL.TableOptions,
+	options: FibOrmSqlDDLSync__SQL.TableOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = "DROP TABLE " + getSqlQueryDialect(db_type).escapeId(options.name);
@@ -31,7 +31,7 @@ export function DROP_TABLE (
 };
 
 export function CHECK_TABLE_HAS_COLUMN (
-	options: FxOrmSqlDDLSync__SQL.CheckTableHasColumnOptions,
+	options: FibOrmSqlDDLSync__SQL.CheckTableHasColumnOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const eid = getSqlQueryDialect(db_type).escapeId;
@@ -44,7 +44,7 @@ export function CHECK_TABLE_HAS_COLUMN (
 };
 
 export function ALTER_TABLE_ADD_COLUMN (
-	options: FxOrmSqlDDLSync__SQL.AddColumnOptions,
+	options: FibOrmSqlDDLSync__SQL.AddColumnOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = [
@@ -58,7 +58,7 @@ export function ALTER_TABLE_ADD_COLUMN (
 };
 
 export function ALTER_TABLE_RENAME_COLUMN (
-	opts: FxOrmSqlDDLSync__SQL.AlertColumnRenameOptions,
+	opts: FibOrmSqlDDLSync__SQL.AlertColumnRenameOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const eid = getSqlQueryDialect(db_type).escapeId;
@@ -69,7 +69,7 @@ export function ALTER_TABLE_RENAME_COLUMN (
 }
 
 export function ALTER_TABLE_MODIFY_COLUMN (
-	options: FxOrmSqlDDLSync__SQL.AlterColumnOptions,
+	options: FibOrmSqlDDLSync__SQL.AlterColumnOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = "ALTER TABLE " + getSqlQueryDialect(db_type).escapeId(options.name) +
@@ -79,7 +79,7 @@ export function ALTER_TABLE_MODIFY_COLUMN (
 };
 
 export function ALTER_TABLE_DROP_COLUMN (
-	options: FxOrmSqlDDLSync__SQL.AlterColumnOptions,
+	options: FibOrmSqlDDLSync__SQL.AlterColumnOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = "ALTER TABLE " + getSqlQueryDialect(db_type).escapeId(options.name) +
@@ -89,7 +89,7 @@ export function ALTER_TABLE_DROP_COLUMN (
 };
 
 export function CREATE_INDEX (
-	options: FxOrmSqlDDLSync__SQL.IndexOptions,
+	options: FibOrmSqlDDLSync__SQL.IndexOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = "CREATE" + (options.unique ? " UNIQUE" : "") + " INDEX " + getSqlQueryDialect(db_type).escapeId(options.name) +
@@ -100,7 +100,7 @@ export function CREATE_INDEX (
 };
 
 export function DROP_INDEX (
-	options: FxOrmSqlDDLSync__SQL.IndexOptions,
+	options: FibOrmSqlDDLSync__SQL.IndexOptions,
 	db_type: FxDbDriverNS.DriverType,
 ) {
 	const sql = "DROP INDEX " + getSqlQueryDialect(db_type).escapeId(options.name) +
@@ -109,6 +109,6 @@ export function DROP_INDEX (
 	return sql;
 };
 
-// export function RENAME_TABLE (options, driver: FxOrmSqlDDLSync__Driver.Driver) {
+// export function RENAME_TABLE (options, driver: FibOrmSqlDDLSync__Driver.Driver) {
 //  const sql = "ALTER TABLE " + options.oldCollectionName + " RENAME TO " + options.newCollectionName + " ;";
 // }

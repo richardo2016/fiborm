@@ -2,14 +2,14 @@
 /// <reference types="@fiborm/orm-core" />
 /// <reference types="@fiborm/db-driver" />
 
-import type { FxOrmSqlDDLSync } from "."
+import type { FibOrmSqlDDLSync } from "."
 import type { FxDbDriverNS } from "../../../db-driver"
 import type { FxOrmCoreCallbackNS } from "../../../orm-core"
-import type { FxOrmSqlDDLSync__Collection } from "./Collection"
-import type { FxOrmSqlDDLSync__Column } from "./Column"
-import type { FxOrmSqlDDLSync__DbIndex } from "./DbIndex"
+import type { FibOrmSqlDDLSync__Collection } from "./Collection"
+import type { FibOrmSqlDDLSync__Column } from "./Column"
+import type { FibOrmSqlDDLSync__DbIndex } from "./DbIndex"
 
-export namespace FxOrmSqlDDLSync__Dialect {
+export namespace FibOrmSqlDDLSync__Dialect {
     export type DialectType = 'mysql' | 'mssql' | 'sqlite' | 'postgresql'
 
     export interface DielectGetTypeOpts {
@@ -54,10 +54,10 @@ export namespace FxOrmSqlDDLSync__Dialect {
             <T = any>(driver: FxDbDriverNS.Driver<ConnType>, name: string): T[]
         }
         getCollectionProperties: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, cb: FxOrmCoreCallbackNS.ExecutionCallback<FxOrmSqlDDLSync__Column.PropertyHash>): void
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, cb: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync__Column.PropertyHash>): void
         }
         getCollectionPropertiesSync: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string): FxOrmSqlDDLSync__Column.PropertyHash
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string): FibOrmSqlDDLSync__Column.PropertyHash
         }
         createCollection: {
             (driver: FxDbDriverNS.Driver<ConnType>, name: string, columns: string[], keys: string[], cb: FxOrmCoreCallbackNS.ExecutionCallback<any>): void
@@ -102,29 +102,29 @@ export namespace FxOrmSqlDDLSync__Dialect {
             (driver: FxDbDriverNS.Driver<ConnType>, name: string, column: string): any
         }
         getCollectionIndexes: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, cb: FxOrmCoreCallbackNS.ExecutionCallback<FxOrmSqlDDLSync__DbIndex.DbIndexInfoHash>): void
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, cb: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync__DbIndex.DbIndexInfoHash>): void
         }
         getCollectionIndexesSync: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string): FxOrmSqlDDLSync__DbIndex.DbIndexInfoHash
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string): FibOrmSqlDDLSync__DbIndex.DbIndexInfoHash
         }
         addIndex: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, unique: boolean, collection: FxOrmSqlDDLSync.TableName, columns: string[], cb: FxOrmCoreCallbackNS.ExecutionCallback<any>): void
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, unique: boolean, collection: FibOrmSqlDDLSync.TableName, columns: string[], cb: FxOrmCoreCallbackNS.ExecutionCallback<any>): void
         }
         addIndexSync: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, unique: boolean, collection: FxOrmSqlDDLSync.TableName, columns: string[]): any
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, unique: boolean, collection: FibOrmSqlDDLSync.TableName, columns: string[]): any
         }
         removeIndex: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, collection: FxOrmSqlDDLSync.TableName, cb: FxOrmCoreCallbackNS.ExecutionCallback<any>): void
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, collection: FibOrmSqlDDLSync.TableName, cb: FxOrmCoreCallbackNS.ExecutionCallback<any>): void
         }
         removeIndexSync: {
-            (driver: FxDbDriverNS.Driver<ConnType>, name: string, collection: FxOrmSqlDDLSync.TableName): any
+            (driver: FxDbDriverNS.Driver<ConnType>, name: string, collection: FibOrmSqlDDLSync.TableName): any
         }
         /**
          * transform semantic property to raw string in db
          */
         getType: (
-            collection: FxOrmSqlDDLSync.TableName,
-            property: FxOrmSqlDDLSync__Column.Property,
+            collection: FibOrmSqlDDLSync.TableName,
+            property: FibOrmSqlDDLSync__Column.Property,
             driver: FxDbDriverNS.Driver<ConnType>,
             opts?: DielectGetTypeOpts
         ) => false | TypeResult
@@ -143,7 +143,7 @@ export namespace FxOrmSqlDDLSync__Dialect {
         }
 
         convertIndexes?: {
-            (rows: FxOrmSqlDDLSync__Collection.Collection, db_idxes: FxOrmSqlDDLSync__DbIndex.DbIndexInfo[]): FxOrmSqlDDLSync__DbIndex.DbIndexInfo[]
+            (rows: FibOrmSqlDDLSync__Collection.Collection, db_idxes: FibOrmSqlDDLSync__DbIndex.DbIndexInfo[]): FibOrmSqlDDLSync__DbIndex.DbIndexInfo[]
         }
 
         [extra: string]: any

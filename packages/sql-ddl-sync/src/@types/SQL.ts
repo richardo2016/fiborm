@@ -1,4 +1,4 @@
-export namespace FxOrmSqlDDLSync__SQL {
+export namespace FibOrmSqlDDLSync__SQL {
     export interface TableOptions {
         name: string
 

@@ -3,12 +3,12 @@ import SQL = require("../SQL");
 
 import { getSqlQueryDialect, arraify, filterPropertyDefaultValue } from '../Utils';
 
-import type { FxOrmSqlDDLSync__Dialect } from "../@types/Dialect";
-import type { FxOrmSqlDDLSync__Column } from "../@types/Column";
-import type { FxOrmSqlDDLSync__Driver } from "../@types/Driver";
+import type { FibOrmSqlDDLSync__Dialect } from "../@types/Dialect";
+import type { FibOrmSqlDDLSync__Column } from "../@types/Column";
+import type { FibOrmSqlDDLSync__Driver } from "../@types/Driver";
 
 // @see https://www.sqlite.org/lang_altertable.html
-export const hasCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['hasCollectionSync'] = function (
+export const hasCollectionSync: FibOrmSqlDDLSync__Dialect.Dialect['hasCollectionSync'] = function (
 	dbdriver, name
 ) {
 	const rows = dbdriver.execute(
@@ -20,7 +20,7 @@ export const hasCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['hasCollectionS
 	return rows.length > 0;
 };
 
-export const hasCollection: FxOrmSqlDDLSync__Dialect.Dialect['hasCollection'] = function (
+export const hasCollection: FibOrmSqlDDLSync__Dialect.Dialect['hasCollection'] = function (
 	dbdriver, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -32,7 +32,7 @@ export const hasCollection: FxOrmSqlDDLSync__Dialect.Dialect['hasCollection'] = 
 /**
  * @no_test
  */
-export const addPrimaryKeySync: FxOrmSqlDDLSync__Dialect.Dialect['addPrimaryKeySync'] = function (
+export const addPrimaryKeySync: FibOrmSqlDDLSync__Dialect.Dialect['addPrimaryKeySync'] = function (
 	dbdriver, tableName, columnName
 ) {
 	return dbdriver.execute(
@@ -43,7 +43,7 @@ export const addPrimaryKeySync: FxOrmSqlDDLSync__Dialect.Dialect['addPrimaryKeyS
 	)
 };
 
-export const addPrimaryKey: FxOrmSqlDDLSync__Dialect.Dialect['addPrimaryKey'] = function (
+export const addPrimaryKey: FibOrmSqlDDLSync__Dialect.Dialect['addPrimaryKey'] = function (
 	dbdriver, tableName, columnName, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -52,7 +52,7 @@ export const addPrimaryKey: FxOrmSqlDDLSync__Dialect.Dialect['addPrimaryKey'] = 
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const dropPrimaryKeySync: FxOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKeySync'] = function (
+export const dropPrimaryKeySync: FibOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKeySync'] = function (
 	dbdriver, tableName, columnName
 ) {
 	return dbdriver.execute(
@@ -63,7 +63,7 @@ export const dropPrimaryKeySync: FxOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKe
 	)
 };
 
-export const dropPrimaryKey: FxOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKey'] = function (
+export const dropPrimaryKey: FibOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKey'] = function (
 	dbdriver, tableName, columnName, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -72,7 +72,7 @@ export const dropPrimaryKey: FxOrmSqlDDLSync__Dialect.Dialect['dropPrimaryKey'] 
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const addForeignKeySync: FxOrmSqlDDLSync__Dialect.Dialect['addForeignKeySync'] = function (
+export const addForeignKeySync: FibOrmSqlDDLSync__Dialect.Dialect['addForeignKeySync'] = function (
 	dbdriver, tableName, options
 ) {
 	return dbdriver.execute(
@@ -83,7 +83,7 @@ export const addForeignKeySync: FxOrmSqlDDLSync__Dialect.Dialect['addForeignKeyS
 	)
 };
 
-export const addForeignKey: FxOrmSqlDDLSync__Dialect.Dialect['addForeignKey'] = function (
+export const addForeignKey: FibOrmSqlDDLSync__Dialect.Dialect['addForeignKey'] = function (
 	dbdriver, tableName, options, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -92,7 +92,7 @@ export const addForeignKey: FxOrmSqlDDLSync__Dialect.Dialect['addForeignKey'] = 
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const dropForeignKeySync: FxOrmSqlDDLSync__Dialect.Dialect['dropForeignKeySync'] = function (
+export const dropForeignKeySync: FibOrmSqlDDLSync__Dialect.Dialect['dropForeignKeySync'] = function (
 	dbdriver, tableName, columnName
 ) {
 	return dbdriver.execute(
@@ -103,7 +103,7 @@ export const dropForeignKeySync: FxOrmSqlDDLSync__Dialect.Dialect['dropForeignKe
 	)
 };
 
-export const dropForeignKey: FxOrmSqlDDLSync__Dialect.Dialect['dropForeignKey'] = function (
+export const dropForeignKey: FibOrmSqlDDLSync__Dialect.Dialect['dropForeignKey'] = function (
 	dbdriver, tableName, columnName, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -112,7 +112,7 @@ export const dropForeignKey: FxOrmSqlDDLSync__Dialect.Dialect['dropForeignKey'] 
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const getCollectionColumnsSync: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionColumnsSync'] = function (
+export const getCollectionColumnsSync: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionColumnsSync'] = function (
 	dbdriver, name
 ) {
 	return dbdriver.execute(
@@ -122,7 +122,7 @@ export const getCollectionColumnsSync: FxOrmSqlDDLSync__Dialect.Dialect['getColl
 	)
 }
 
-export const getCollectionColumns: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionColumns'] = function (
+export const getCollectionColumns: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionColumns'] = function (
 	dbdriver, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -131,15 +131,15 @@ export const getCollectionColumns: FxOrmSqlDDLSync__Dialect.Dialect['getCollecti
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const getCollectionPropertiesSync: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionPropertiesSync'] = function (
+export const getCollectionPropertiesSync: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionPropertiesSync'] = function (
 	dbdriver, name
 ) {
 	const cols = getCollectionColumnsSync(dbdriver, name)
 
-	let columns = <{ [col: string]: FxOrmSqlDDLSync__Column.PropertySQLite }>{}, m;
+	let columns = <{ [col: string]: FibOrmSqlDDLSync__Column.PropertySQLite }>{}, m;
 
 	for (let i = 0; i < cols.length; i++) {
-		const column = <FxOrmSqlDDLSync__Column.PropertySQLite>{};
+		const column = <FibOrmSqlDDLSync__Column.PropertySQLite>{};
 		const dCol = cols[i];
 
 		if (dCol.pk) {
@@ -216,7 +216,7 @@ export const getCollectionPropertiesSync: FxOrmSqlDDLSync__Dialect.Dialect['getC
 	return columns;
 };
 
-export const getCollectionProperties: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionProperties'] = function (
+export const getCollectionProperties: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionProperties'] = function (
 	dbdriver, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -225,7 +225,7 @@ export const getCollectionProperties: FxOrmSqlDDLSync__Dialect.Dialect['getColle
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const createCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['createCollectionSync'] = function (
+export const createCollectionSync: FibOrmSqlDDLSync__Dialect.Dialect['createCollectionSync'] = function (
 	dbdriver, name, columns, keys
 ) {
 	return dbdriver.execute(
@@ -237,7 +237,7 @@ export const createCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['createColle
 	)
 };
 
-export const createCollection: FxOrmSqlDDLSync__Dialect.Dialect['createCollection'] = function (
+export const createCollection: FibOrmSqlDDLSync__Dialect.Dialect['createCollection'] = function (
 	dbdriver, name, columns, keys, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -246,7 +246,7 @@ export const createCollection: FxOrmSqlDDLSync__Dialect.Dialect['createCollectio
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const dropCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['dropCollectionSync'] = function (
+export const dropCollectionSync: FibOrmSqlDDLSync__Dialect.Dialect['dropCollectionSync'] = function (
 	dbdriver, name
 ) {
 	return dbdriver.execute(
@@ -254,7 +254,7 @@ export const dropCollectionSync: FxOrmSqlDDLSync__Dialect.Dialect['dropCollectio
 	)
 };
 
-export const dropCollection: FxOrmSqlDDLSync__Dialect.Dialect['dropCollection'] = function (
+export const dropCollection: FibOrmSqlDDLSync__Dialect.Dialect['dropCollection'] = function (
 	dbdriver, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -263,17 +263,17 @@ export const dropCollection: FxOrmSqlDDLSync__Dialect.Dialect['dropCollection'] 
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const hasCollectionColumnsSync: FxOrmSqlDDLSync__Dialect.Dialect['hasCollectionColumnsSync'] = function (
+export const hasCollectionColumnsSync: FibOrmSqlDDLSync__Dialect.Dialect['hasCollectionColumnsSync'] = function (
 	dbdriver, name, column
 ) {
-	const cols = getCollectionColumnsSync<FxOrmSqlDDLSync__Column.ColumnInfo__SQLite>(dbdriver, name)
+	const cols = getCollectionColumnsSync<FibOrmSqlDDLSync__Column.ColumnInfo__SQLite>(dbdriver, name)
 
 	return arraify(column).every(
 		column_name => cols.find(col => col.name === column_name)
 	)
 };
 
-export const hasCollectionColumns: FxOrmSqlDDLSync__Dialect.Dialect['hasCollectionColumns'] = function (
+export const hasCollectionColumns: FibOrmSqlDDLSync__Dialect.Dialect['hasCollectionColumns'] = function (
 	dbdriver, name, column, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -282,7 +282,7 @@ export const hasCollectionColumns: FxOrmSqlDDLSync__Dialect.Dialect['hasCollecti
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const addCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['addCollectionColumnSync'] = function (
+export const addCollectionColumnSync: FibOrmSqlDDLSync__Dialect.Dialect['addCollectionColumnSync'] = function (
 	dbdriver, name, column, after_column
 ) {
 	return dbdriver.execute(
@@ -294,7 +294,7 @@ export const addCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['addColle
 	)
 };
 
-export const addCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['addCollectionColumn'] = function (
+export const addCollectionColumn: FibOrmSqlDDLSync__Dialect.Dialect['addCollectionColumn'] = function (
 	dbdriver, name, column, after_column, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -303,7 +303,7 @@ export const addCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['addCollectio
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const renameCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['renameCollectionColumnSync'] = function (
+export const renameCollectionColumnSync: FibOrmSqlDDLSync__Dialect.Dialect['renameCollectionColumnSync'] = function (
 	dbdriver, name,
 	oldColName: string,
 	newColName: string
@@ -315,7 +315,7 @@ export const renameCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['renam
 	)
 };
 
-export const renameCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['renameCollectionColumn'] = function (
+export const renameCollectionColumn: FibOrmSqlDDLSync__Dialect.Dialect['renameCollectionColumn'] = function (
 	dbdriver, name,
 	oldColName: string,
 	newColName: string, cb
@@ -326,7 +326,7 @@ export const renameCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['renameCol
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const modifyCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['modifyCollectionColumnSync'] = function (
+export const modifyCollectionColumnSync: FibOrmSqlDDLSync__Dialect.Dialect['modifyCollectionColumnSync'] = function (
 	dbdriver, name, column
 ) {
 	return dbdriver.execute(
@@ -337,7 +337,7 @@ export const modifyCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['modif
 	)
 };
 
-export const modifyCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['modifyCollectionColumn'] = function (
+export const modifyCollectionColumn: FibOrmSqlDDLSync__Dialect.Dialect['modifyCollectionColumn'] = function (
 	dbdriver, name, column, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -346,13 +346,13 @@ export const modifyCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['modifyCol
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const dropCollectionColumnSync: FxOrmSqlDDLSync__Dialect.Dialect['dropCollectionColumnSync'] = function (
+export const dropCollectionColumnSync: FibOrmSqlDDLSync__Dialect.Dialect['dropCollectionColumnSync'] = function (
 	dbdriver, name, column
 ) {
 	throw new Error('sqlite does not support dropping columns')
 };
 
-export const dropCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['dropCollectionColumn'] = function (
+export const dropCollectionColumn: FibOrmSqlDDLSync__Dialect.Dialect['dropCollectionColumn'] = function (
 	dbdriver, name, column, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -361,7 +361,7 @@ export const dropCollectionColumn: FxOrmSqlDDLSync__Dialect.Dialect['dropCollect
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const getCollectionIndexesSync: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionIndexesSync'] = function (
+export const getCollectionIndexesSync: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionIndexesSync'] = function (
 	dbdriver, name
 ) {
 	const rows = dbdriver.execute(
@@ -388,7 +388,7 @@ export const getCollectionIndexesSync: FxOrmSqlDDLSync__Dialect.Dialect['getColl
 	return indexes;
 };
 
-export const getCollectionIndexes: FxOrmSqlDDLSync__Dialect.Dialect['getCollectionIndexes'] = function (
+export const getCollectionIndexes: FibOrmSqlDDLSync__Dialect.Dialect['getCollectionIndexes'] = function (
 	dbdriver, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -397,7 +397,7 @@ export const getCollectionIndexes: FxOrmSqlDDLSync__Dialect.Dialect['getCollecti
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const addIndexSync: FxOrmSqlDDLSync__Dialect.Dialect['addIndexSync'] = function (
+export const addIndexSync: FibOrmSqlDDLSync__Dialect.Dialect['addIndexSync'] = function (
 	dbdriver, name, unique, collection, columns
 ) {
 	return dbdriver.execute(
@@ -410,7 +410,7 @@ export const addIndexSync: FxOrmSqlDDLSync__Dialect.Dialect['addIndexSync'] = fu
 	)
 };
 
-export const addIndex: FxOrmSqlDDLSync__Dialect.Dialect['addIndex'] = function (
+export const addIndex: FibOrmSqlDDLSync__Dialect.Dialect['addIndex'] = function (
 	dbdriver, name, unique, collection, columns, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -419,7 +419,7 @@ export const addIndex: FxOrmSqlDDLSync__Dialect.Dialect['addIndex'] = function (
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const removeIndexSync: FxOrmSqlDDLSync__Dialect.Dialect['removeIndexSync'] = function (
+export const removeIndexSync: FibOrmSqlDDLSync__Dialect.Dialect['removeIndexSync'] = function (
 	dbdriver, collection, name
 ) {
 
@@ -428,7 +428,7 @@ export const removeIndexSync: FxOrmSqlDDLSync__Dialect.Dialect['removeIndexSync'
 	)
 };
 
-export const removeIndex: FxOrmSqlDDLSync__Dialect.Dialect['removeIndex'] = function (
+export const removeIndex: FibOrmSqlDDLSync__Dialect.Dialect['removeIndex'] = function (
 	dbdriver, collection, name, cb
 ) {
 	const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod(
@@ -437,7 +437,7 @@ export const removeIndex: FxOrmSqlDDLSync__Dialect.Dialect['removeIndex'] = func
 	FxORMCore.Utils.throwErrOrCallabckErrResult(exposedErrResults, { no_throw: true, callback: cb });
 };
 
-export const processKeys: FxOrmSqlDDLSync__Dialect.Dialect['processKeys'] = function (keys) {
+export const processKeys: FibOrmSqlDDLSync__Dialect.Dialect['processKeys'] = function (keys) {
 	if (keys.length === 1) {
 		return [];
 	}
@@ -445,7 +445,7 @@ export const processKeys: FxOrmSqlDDLSync__Dialect.Dialect['processKeys'] = func
 	return keys;
 };
 
-export const supportsType: FxOrmSqlDDLSync__Dialect.Dialect['supportsType'] = function (type) {
+export const supportsType: FibOrmSqlDDLSync__Dialect.Dialect['supportsType'] = function (type) {
 	switch (type) {
 		case "boolean":
 		case "enum":
@@ -454,12 +454,12 @@ export const supportsType: FxOrmSqlDDLSync__Dialect.Dialect['supportsType'] = fu
 	return type;
 };
 
-export const getType: FxOrmSqlDDLSync__Dialect.Dialect['getType'] = function (
-	collection, property: FxOrmSqlDDLSync__Column.PropertySQLite, driver, opts
+export const getType: FibOrmSqlDDLSync__Dialect.Dialect['getType'] = function (
+	collection, property: FibOrmSqlDDLSync__Column.PropertySQLite, driver, opts
 ) {
 	const { for: _for = 'create_table' } = opts || {}
 
-	let type: false | FxOrmSqlDDLSync__Column.ColumnType_SQLite = false;
+	let type: false | FibOrmSqlDDLSync__Column.ColumnType_SQLite = false;
 	let customType = null;
 
 	if (property.type == 'number' && property.rational === false) {
@@ -565,9 +565,9 @@ export const getType: FxOrmSqlDDLSync__Dialect.Dialect['getType'] = function (
 };
 
 function convertIndexRows(
-	rows: FxOrmSqlDDLSync__Driver.DbIndexInfo_SQLite[]
-): {[k: string]: FxOrmSqlDDLSync__Driver.DbIndexInfo_SQLite} {
-	const indexes = <{[k: string]: FxOrmSqlDDLSync__Driver.DbIndexInfo_SQLite}>{};
+	rows: FibOrmSqlDDLSync__Driver.DbIndexInfo_SQLite[]
+): {[k: string]: FibOrmSqlDDLSync__Driver.DbIndexInfo_SQLite} {
+	const indexes = <{[k: string]: FibOrmSqlDDLSync__Driver.DbIndexInfo_SQLite}>{};
 
 	for (let i = 0; i < rows.length; i++) {
 		if (!indexes.hasOwnProperty(rows[i].name)) {

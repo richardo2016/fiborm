@@ -1,6 +1,6 @@
 import type { FxDbDriverNS } from '@fiborm/db-driver';
 
-export namespace FxOrmSqlDDLSync__Column {
+export namespace FibOrmSqlDDLSync__Column {
     export interface PropertyDescriptor {}
 
     export type __StringType<ENUM_T = string> = string | ENUM_T
@@ -37,7 +37,7 @@ export namespace FxOrmSqlDDLSync__Column {
     }
     
     export interface PropertyHash {
-        [col: string]: FxOrmSqlDDLSync__Column.Property
+        [col: string]: FibOrmSqlDDLSync__Column.Property
     }
 
     export type PropertyType = __StringType<'text' | 'integer' | 'number' | 'serial' | 'boolean' | 'date' | 'binary' | 'object' | 'enum' | 'point'>

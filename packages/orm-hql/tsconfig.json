@@ -18,5 +18,8 @@
         "typeRoots": [
             "typings/index.d.ts"
         ]
-    }
+    },
+    "exclude": [
+        "./src/*.json"
+    ]
 }

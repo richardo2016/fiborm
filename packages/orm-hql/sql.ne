@@ -9,7 +9,7 @@
     return o;
   }
 
-  const reserved=require('./reserved.json');
+  const reserved=require('../reserved.json');
   const valid_function_identifiers=['LEFT','RIGHT','REPLACE','MOD']
 %}
 

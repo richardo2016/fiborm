@@ -1,6 +1,6 @@
 /// <reference types="@fibjs/types" />
 import type { FxDbDriverNS } from '@fiborm/db-driver';
-export declare namespace FxOrmSqlDDLSync__Column {
+export declare namespace FibOrmSqlDDLSync__Column {
     interface PropertyDescriptor {
     }
     type __StringType<ENUM_T = string> = string | ENUM_T;
@@ -28,7 +28,7 @@ export declare namespace FxOrmSqlDDLSync__Column {
         [ext_k: string]: any;
     }
     interface PropertyHash {
-        [col: string]: FxOrmSqlDDLSync__Column.Property;
+        [col: string]: FibOrmSqlDDLSync__Column.Property;
     }
     type PropertyType = __StringType<'text' | 'integer' | 'number' | 'serial' | 'boolean' | 'date' | 'binary' | 'object' | 'enum' | 'point'>;
     type PropertyType_MySQL = PropertyType;

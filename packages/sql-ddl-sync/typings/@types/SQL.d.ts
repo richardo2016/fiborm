@@ -1,4 +1,4 @@
-export declare namespace FxOrmSqlDDLSync__SQL {
+export declare namespace FibOrmSqlDDLSync__SQL {
     interface TableOptions {
         name: string;
         keys?: string[];

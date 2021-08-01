@@ -7,7 +7,9 @@
 	"types": "typings/index.d.ts",
 	"files": [
 		"lib",
-		"typings"
+		"typings",
+		"@types",
+		"reserved.json"
 	],
 	"repository": {
 		"type": "https",
@@ -15,9 +17,11 @@
 	},
 	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/orm-hql",
 	"scripts": {
+		"compile": "fibjs ./build-ne.js",
+		"prebuild": "fibjs build-ne.js",
 		"build": "ftsc ./src/* --outDir ./lib",
 		"test": "fibjs test",
-		"ci": "npm run build && npm run test",
+		"ci": "npm run build && npm run compile && npm run test",
 		"prepublishOnly": "npm run ci"
 	},
 	"author": "richardo2016 <richardo2016@gmail.com>",

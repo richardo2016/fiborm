@@ -1,11 +1,11 @@
-import type { FxOrmSqlDDLSync__Column } from "./Column";
+import type { FibOrmSqlDDLSync__Column } from "./Column";
 
-export namespace FxOrmSqlDDLSync__Collection {
+export namespace FibOrmSqlDDLSync__Collection {
     export interface Collection {
         // table name
         name: string
         properties: {
-            [k: string]: FxOrmSqlDDLSync__Column.Property
+            [k: string]: FibOrmSqlDDLSync__Column.Property
         }
         
         [ext_k: string]: any

@@ -4,9 +4,9 @@ import { Dialects } from '@fiborm/sql-query';
 
 import type { FxDbDriverNS } from "../../db-driver";
 
-import type { FxOrmSqlDDLSync } from "./@types";
-import type { FxOrmSqlDDLSync__Collection } from "./@types/Collection";
-import type { FxOrmSqlDDLSync__Column } from "./@types/Column";
+import type { FibOrmSqlDDLSync } from "./@types";
+import type { FibOrmSqlDDLSync__Collection } from "./@types/Collection";
+import type { FibOrmSqlDDLSync__Column } from "./@types/Column";
 
 export function logJson (group: string, detail: any) {
     let json = null;
@@ -30,7 +30,7 @@ export function arraify<T = any> (item: T | T[]): T[] {
 	return Array.isArray(item) ? item : [item]
 }
 
-export function getCollectionMapsTo_PropertyNameDict (collection: FxOrmSqlDDLSync__Collection.Collection) {
+export function getCollectionMapsTo_PropertyNameDict (collection: FibOrmSqlDDLSync__Collection.Collection) {
     const hash = <{[k: string]: string}>{}
 
     Object.keys(collection.properties).forEach(pname => {
@@ -43,10 +43,10 @@ export function getCollectionMapsTo_PropertyNameDict (collection: FxOrmSqlDDLSyn
 }
 
 export function filterPropertyDefaultValue (
-    property: FxOrmSqlDDLSync__Column.Property,
+    property: FibOrmSqlDDLSync__Column.Property,
     ctx: {
         collection: string,
-        property: FxOrmSqlDDLSync__Column.Property,
+        property: FibOrmSqlDDLSync__Column.Property,
         driver: FxDbDriverNS.Driver
     }
 ) {
@@ -61,7 +61,7 @@ export function filterPropertyDefaultValue (
 }
 
 export function filterSyncStrategy (
-    strategy: FxOrmSqlDDLSync.SyncCollectionOptions['strategy']
+    strategy: FibOrmSqlDDLSync.SyncCollectionOptions['strategy']
 ) {
     switch (strategy) {
         case 'hard':
@@ -76,7 +76,7 @@ export function filterSyncStrategy (
 }
 
 export function filterSuppressColumnDrop (
-    suppressColumnDrop: boolean, db_type: FxOrmSqlDDLSync.Sync['dbdriver']['type']
+    suppressColumnDrop: boolean, db_type: FibOrmSqlDDLSync.Sync['dbdriver']['type']
 ) {
     if (db_type === 'sqlite')
         return true

@@ -1,11 +1,11 @@
-import { FxDbDriverNS } from "../../../db-driver";
-import { FxOrmCoreCallbackNS } from "../../../orm-core";
-import { FxOrmSqlDDLSync__Collection } from "./Collection";
-import { FxOrmSqlDDLSync__Column } from "./Column";
-import { FxOrmSqlDDLSync__DbIndex } from "./DbIndex";
-import { FxOrmSqlDDLSync__Driver } from "./Driver";
-import { FxOrmSqlDDLSync__Dialect } from "./Dialect";
-export declare namespace FxOrmSqlDDLSync {
+import { FxDbDriverNS } from "@fiborm/db-driver";
+import { FxOrmCoreCallbackNS } from "@fiborm/orm-core";
+import { FibOrmSqlDDLSync__Collection } from "./Collection";
+import { FibOrmSqlDDLSync__Column } from "./Column";
+import { FibOrmSqlDDLSync__DbIndex } from "./DbIndex";
+import { FibOrmSqlDDLSync__Driver } from "./Driver";
+import { FibOrmSqlDDLSync__Dialect } from "./Dialect";
+export declare namespace FibOrmSqlDDLSync {
     type TableName = string;
     type ColumnName = string;
     interface SyncOptions<ConnType = any> {
@@ -15,13 +15,13 @@ export declare namespace FxOrmSqlDDLSync {
          * @default true
          */
         suppressColumnDrop?: boolean;
-        syncStrategy?: FxOrmSqlDDLSync.SyncCollectionOptions['strategy'];
+        syncStrategy?: FibOrmSqlDDLSync.SyncCollectionOptions['strategy'];
     }
     interface SyncResult {
         changes: number;
     }
     interface SyncCollectionOptions {
-        columns?: FxOrmSqlDDLSync__Column.PropertyHash;
+        columns?: FibOrmSqlDDLSync__Column.PropertyHash;
         strategy?: 'soft' | 'hard' | 'mixed';
         /**
          * @default true
@@ -29,22 +29,22 @@ export declare namespace FxOrmSqlDDLSync {
         suppressColumnDrop?: boolean;
     }
     class Sync<ConnType = any> {
-        strategy: FxOrmSqlDDLSync.SyncCollectionOptions['strategy'];
-        constructor(options: FxOrmSqlDDLSync.SyncOptions<ConnType>);
+        strategy: FibOrmSqlDDLSync.SyncCollectionOptions['strategy'];
+        constructor(options: FibOrmSqlDDLSync.SyncOptions<ConnType>);
         readonly dbdriver: FxDbDriverNS.Driver<ConnType>;
-        readonly Dialect: FxOrmSqlDDLSync__Dialect.Dialect;
-        readonly types: FxOrmSqlDDLSync__Driver.CustomPropertyTypeHash;
-        defineCollection(collection_name: string, properties: FxOrmSqlDDLSync__Collection.Collection['properties']): this;
-        findCollection(collection_name: string): FxOrmSqlDDLSync__Collection.Collection;
-        defineType(type: string, proto: FxOrmSqlDDLSync__Driver.CustomPropertyType): this;
+        readonly Dialect: FibOrmSqlDDLSync__Dialect.Dialect;
+        readonly types: FibOrmSqlDDLSync__Driver.CustomPropertyTypeHash;
+        defineCollection(collection_name: string, properties: FibOrmSqlDDLSync__Collection.Collection['properties']): this;
+        findCollection(collection_name: string): FibOrmSqlDDLSync__Collection.Collection;
+        defineType(type: string, proto: FibOrmSqlDDLSync__Driver.CustomPropertyType): this;
         /**
          * @description
          *  create collection in db if it doesn't exist, then sync all columns for it.
          *
          * @param collection collection relation to create
          */
-        createCollection<T = any>(collection: FxOrmSqlDDLSync__Collection.Collection): T;
-        getCollectionIndexes(collection: FxOrmSqlDDLSync__Collection.Collection): FxOrmSqlDDLSync__DbIndex.DbIndexInfo[];
+        createCollection<T = any>(collection: FibOrmSqlDDLSync__Collection.Collection): T;
+        getCollectionIndexes(collection: FibOrmSqlDDLSync__Collection.Collection): FibOrmSqlDDLSync__DbIndex.DbIndexInfo[];
         /**
          * @description
          *  compare/diff properties between definition ones and the real ones,
@@ -60,9 +60,9 @@ export declare namespace FxOrmSqlDDLSync {
          *      - 'mixed': add missing columns, but never change existed column in db
          *      - 'hard': modify existed columns in db
          */
-        syncCollection(collection: string | FxOrmSqlDDLSync__Collection.Collection, opts?: SyncCollectionOptions): void;
-        syncIndexes(collection_name: string, indexes: FxOrmSqlDDLSync__DbIndex.DbIndexInfo[]): void;
-        needDefinitionToColumn(property: FxOrmSqlDDLSync__Column.Property, column: FxOrmSqlDDLSync__Column.Property, options?: {
+        syncCollection(collection: string | FibOrmSqlDDLSync__Collection.Collection, opts?: SyncCollectionOptions): void;
+        syncIndexes(collection_name: string, indexes: FibOrmSqlDDLSync__DbIndex.DbIndexInfo[]): void;
+        needDefinitionToColumn(property: FibOrmSqlDDLSync__Column.Property, column: FibOrmSqlDDLSync__Column.Property, options?: {
             collection?: string;
         }): boolean;
         /**
@@ -86,7 +86,7 @@ export declare namespace FxOrmSqlDDLSync {
         [ext: string]: any;
     }
     interface ExportModule {
-        dialect(name: FxOrmSqlDDLSync__Dialect.DialectType): FxOrmSqlDDLSync__Dialect.Dialect;
+        dialect(name: FibOrmSqlDDLSync__Dialect.DialectType): FibOrmSqlDDLSync__Dialect.Dialect;
         Sync: typeof Sync;
     }
 }

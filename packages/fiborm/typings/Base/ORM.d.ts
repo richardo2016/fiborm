@@ -120,9 +120,6 @@ declare class ORM<ConnType = any> extends EventEmitter implements Class_ORM {
             fullOuterJoin: (value?: any) => FxOrmQueries.OperatorFunction<"fullOuterJoin">;
         };
         Others: {
-            /**
-             * @TODO: check why `this.modelDefinitions` is not correct in `.useTrans` callback?
-             */
             bracketRound: (value?: any) => FxOrmQueries.OperatorFunction<"bracketRound">;
             bracketSquare: (value?: any) => FxOrmQueries.OperatorFunction<"bracketSquare">;
             bracketBrace: (value?: any) => FxOrmQueries.OperatorFunction<"bracketBrace">;

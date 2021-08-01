@@ -102,6 +102,8 @@ class ORM<ConnType = any> extends EventEmitter implements Class_ORM {
             driver = Driver.create(_driver);
         else if (typeof _driver === 'object' && !(_driver instanceof Driver))
             driver = Driver.create(_driver as any);
+        else
+            driver = _driver;
 
         this.driver = <Driver<ConnType>>driver;
 

@@ -2,6 +2,9 @@
 
 import util    = require("util");
 import helpers = require("../Helpers");
+import { FxSqlQueryDialect } from "../Typo/Dialect";
+import { FxSqlQuery } from "../Typo/Query";
+import { FxSqlQuerySql } from "../Typo/Sql";
 
 const DataTypes = {
 	id:    'INTEGER PRIMARY KEY AUTO_INCREMENT',

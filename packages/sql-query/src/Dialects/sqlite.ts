@@ -1,7 +1,8 @@
-/// <reference path="../@types/index.d.ts" />
-
 import util    = require("util");
 import helpers = require("../Helpers");
+import { FxSqlQueryDialect } from "../Typo/Dialect";
+import { FxSqlQuery } from "../Typo/Query";
+import { FxSqlQuerySql } from "../Typo/Sql";
 
 
 const DataTypes = {

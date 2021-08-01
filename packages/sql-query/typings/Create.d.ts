@@ -1,11 +1,13 @@
-/// <reference path="../src/@types/index.d.ts" />
+import { FxSqlQueryDialect } from "./Typo/Dialect";
+import { FxSqlQueryColumns } from "./Typo/Field";
+import { FxSqlQueryChainBuilder } from "./Typo/Query-ChainBuilder";
 /**
  * Instantiate a new CREATE-type query builder
  * @param Dialect
  * @returns {{table: table, field: field, fields: fields, build: build}}
  * @constructor
  */
-export declare class CreateQuery implements FxSqlQuery.ChainBuilder__Create {
+export declare class CreateQuery implements FxSqlQueryChainBuilder.ChainBuilder__Create {
     private Dialect;
     tableName: string;
     structure: FxSqlQueryColumns.FieldItemTypeMap;

@@ -1,9 +1,10 @@
-/// <reference path="Sql.d.ts" />
+import { FxSqlQuery } from "./Query"
+import { FxSqlQuerySql } from "./Sql"
 
-declare namespace FxSqlQueryDialect {
-	type DialectType = 'mysql' | 'mssql' | 'sqlite' | 'postgresql'
+export namespace FxSqlQueryDialect {
+	export type DialectType = 'mysql' | 'mssql' | 'sqlite'/*  | 'postgresql' */
 
-	interface DataTypesDescriptorBase {
+	export interface DataTypesDescriptorBase {
 		id: string
 		int: string
 		float: string
@@ -11,13 +12,13 @@ declare namespace FxSqlQueryDialect {
 		text: string
 	}
 
-	type DialectFieldType = keyof DataTypesDescriptorBase
+	export type DialectFieldType = keyof DataTypesDescriptorBase
 
-	interface DataTypesDescriptor extends DataTypesDescriptorBase {
+	export interface DataTypesDescriptor extends DataTypesDescriptorBase {
 		isSQLITE?: boolean
 	}
 
-	interface Dialect {
+	export interface Dialect {
 		DataTypes: DataTypesDescriptor
 		type: DialectType
 
@@ -37,11 +38,10 @@ declare namespace FxSqlQueryDialect {
 
 		limitAsTop: boolean
 
-		// readonly knex: Knex
 		readonly knex: import('@fiborm/knex').KnexInstance
 	}
 
-	type fn_escape = Dialect['escape']
-	type fn_escapeId = Dialect['escapeId']
-	type fn_escapeVal = Dialect['escapeVal']
+	export type fn_escape = Dialect['escape']
+	export type fn_escapeId = Dialect['escapeId']
+	export type fn_escapeVal = Dialect['escapeVal']
 }

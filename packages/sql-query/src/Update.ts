@@ -1,9 +1,13 @@
-/// <reference path="./@types/index.d.ts" />
-
 import UpdateSet   	= require("./Set");
 import Where 		= require("./Where");
 
-export class UpdateQuery implements FxSqlQuery.ChainBuilder__Update {
+import { FxSqlQuerySql } from "./Typo/Sql";
+import { FxSqlQuery } from "./Typo/Query";
+import { FxSqlQueryDialect } from "./Typo/Dialect";
+import { FxSqlQuerySubQuery } from "./Typo/SubQuery";
+import { FxSqlQueryChainBuilder } from "./Typo/Query-ChainBuilder";
+
+export class UpdateQuery implements FxSqlQueryChainBuilder.ChainBuilder__Update {
 	private sql: FxSqlQuerySql.SqlQueryChainDescriptor = {
 		where : []
 	};

@@ -1,8 +1,14 @@
 // Transforms:
 // "name LIKE ? AND age > ?", ["John", 23]
 // into:
+
+import { FxSqlQueryDialect } from "./Typo/Dialect";
+import { FxSqlQuery } from "./Typo/Query";
+import { FxSqlQueryChainBuilder } from "./Typo/Query-ChainBuilder";
+import { FxSqlQuerySql } from "./Typo/Sql";
+
 // "name LIKE 'John' AND age > 23"
-export const escapeQuery: FxSqlQueryHelpler.HelperModule['escapeQuery'] = function (
+export function escapeQuery (
 	Dialect: FxSqlQueryDialect.Dialect,
 	query: FxSqlQuerySql.SqlFragmentStr,
 	args: FxSqlQuerySql.SqlAssignmentValues
@@ -18,8 +24,10 @@ export const escapeQuery: FxSqlQueryHelpler.HelperModule['escapeQuery'] = functi
 	});
 }
 
-export const dateToString: FxSqlQueryHelpler.HelperModule['dateToString'] = function (
-	date: number|Date, timeZone: FxSqlQuery.FxSqlQueryTimezone, opts: FxSqlQuery.ChainBuilderOptions
+export function dateToString (
+	date: number|Date,
+	timeZone: FxSqlQuery.FxSqlQueryTimezone,
+	opts: FxSqlQueryChainBuilder.ChainBuilderOptions
 ): string {
 	const dt = new Date(date);
 
@@ -47,9 +55,7 @@ export const dateToString: FxSqlQueryHelpler.HelperModule['dateToString'] = func
 	}
 }
 
-export const zeroPad: FxSqlQueryHelpler.HelperModule['zeroPad'] = function (
-	number: string|number, n: number = 2
-): string {
+export function zeroPad ( number: string|number, n: number = 2 ): string {
 	number = "" + number;
 
 	while (number.length < n) {
@@ -89,9 +95,7 @@ export function get_table_alias (
 // 	return get_table_alias(sql, table)
 // }
 
-export const parseTableInputStr: FxSqlQueryHelpler.HelperModule['parseTableInputStr'] = function (
-	table_name: FxSqlQuerySql.SqlTableInputType
-): FxSqlQuerySql.SqlTableTuple {
+export function parseTableInputStr ( table_name: FxSqlQuerySql.SqlTableInputType ): FxSqlQuerySql.SqlTableTuple {
 	if (!table_name)
 		throw `invalid input table_name!`
 
@@ -148,7 +152,7 @@ export function ensureNumber (num: any) {
 	return num;
 }
 
-export function bufferToString (buffer: Class_Buffer, dialect: FxSqlQueryDialect.DialectType) {
+export function bufferToString (buffer: Class_Buffer | string, dialect: FxSqlQueryDialect.DialectType) {
 	switch (dialect) {
 		case 'mssql':
 			return "X'" + buffer.toString('hex') + "'";
@@ -156,12 +160,12 @@ export function bufferToString (buffer: Class_Buffer, dialect: FxSqlQueryDialect
 			return "X'" + buffer.toString('hex')+ "'";
 		case 'sqlite':
 			return "X'" + buffer.toString('hex') + "'";
-		case 'postgresql':
-			return "'\\x" + buffer.toString('hex') + "'";
+		// case 'postgresql':
+		// 	return "'\\x" + buffer.toString('hex') + "'";
 	}
 }
 
-export function escapeValForKnex (val: any, Dialect: FxSqlQueryDialect.Dialect, opts: FxSqlQuery.ChainBuilderOptions) {
+export function escapeValForKnex (val: any, Dialect: FxSqlQueryDialect.Dialect, opts: FxSqlQueryChainBuilder.ChainBuilderOptions) {
 	// never escapeVal those types with `Dialect.escapeVal`, knex would escape them automatically
 	const _type = typeof val;
 

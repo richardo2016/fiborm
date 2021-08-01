@@ -1,11 +1,15 @@
-import Knex = require('@fiborm/knex')
 import { escapeValForKnex } from './Helpers';
+import { FxSqlQueryDialect } from './Typo/Dialect';
+import { FxSqlQueryChainBuilder } from './Typo/Query-ChainBuilder';
+import { FxSqlQuerySql } from './Typo/Sql';
+
+import type { KnexNS } from '@fiborm/knex';
 
 export function build (
-	knexQueryBuilder: Knex.KnexNS.QueryBuilder,
+	knexQueryBuilder: KnexNS.QueryBuilder,
 	Dialect: FxSqlQueryDialect.Dialect,
 	set: FxSqlQuerySql.DataToSet,
-	opts: FxSqlQuery.ChainBuilderOptions
+	opts: FxSqlQueryChainBuilder.ChainBuilderOptions
 ): void {
 	opts = opts || {};
 

@@ -1,23 +1,23 @@
-declare namespace FxSqlQueryComparator {
-	type IdType = string | number
-	type SimpleEqValueType = string | number | boolean | Date
-	type NormalizedInOperator = 'in' | 'not_in' | 'IN' | 'NOT_IN'
+export namespace FxSqlQueryComparator {
+	export type IdType = string | number
+	export type SimpleEqValueType = string | number | boolean | Date
+	export type NormalizedInOperator = 'in' | 'not_in' | 'IN' | 'NOT_IN'
 
-    type InputValue_eq = { "eq": SimpleEqValueType }
-    type InputValue_ne = { "ne": SimpleEqValueType }
-    type InputValue_gt = { "gt": number }
-    type InputValue_gte = { "gte": number }
-    type InputValue_lt = { "lt": number }
-    type InputValue_lte = { "lte": number }
-    type InputValue_like = { "like": string }
-    type InputValue_not_like = { "not_like": string }
-    type InputValue_between = { "between": [number, number] }
-    type InputValue_not_between = { "not_between": [number, number] }
+    export type InputValue_eq = { "eq": SimpleEqValueType }
+    export type InputValue_ne = { "ne": SimpleEqValueType }
+    export type InputValue_gt = { "gt": number }
+    export type InputValue_gte = { "gte": number }
+    export type InputValue_lt = { "lt": number }
+    export type InputValue_lte = { "lte": number }
+    export type InputValue_like = { "like": string }
+    export type InputValue_not_like = { "not_like": string }
+    export type InputValue_between = { "between": [number, number] }
+    export type InputValue_not_between = { "not_between": [number, number] }
 
-    type InputValue_in = { "in": IdType[] }
-	type InputValue_not_in = { "not_in": IdType[] }
+    export type InputValue_in = { "in": IdType[] }
+	export type InputValue_not_in = { "not_in": IdType[] }
 
-	type InputComparatorObjectValue =
+	export type InputComparatorObjectValue =
 		InputValue_eq
 		| InputValue_ne
 		| InputValue_gt
@@ -31,28 +31,28 @@ declare namespace FxSqlQueryComparator {
 		| InputValue_in
 		| InputValue_not_in
 
-	type InputValueType =
+	export type InputValueType =
 		SimpleEqValueType | InputComparatorObjectValue
 
-	interface SubQueryComparatorInput {
+	export interface SubQueryComparatorInput {
 		[k: string]: FxSqlQueryComparator.QueryComparatorObject
 	}
 
 	// compatible
-	interface SubQuerySimpleEqInput {
+	export interface SubQuerySimpleEqInput {
 		[k: string]: SimpleEqValueType
 	}
 
-	interface SubQueryInput {
+	export interface SubQueryInput {
 		[k: string]: FxSqlQueryComparator.QueryComparatorObject | SimpleEqValueType
 	}
 
-	interface Input {
+	export interface Input {
 		[key: string]: InputValueType
 	}
 
-	type QueryComparatorExprType = string
-	type QueryComparatorObject<T = any> = {
+	export type QueryComparatorExprType = string
+	export type QueryComparatorObject<T = any> = {
 		sql_comparator: {
 			(): ComparatorNames
 		}
@@ -65,11 +65,11 @@ declare namespace FxSqlQueryComparator {
 		// to field
 		to?: string
 	}
-	type SimpleQueryConjunctionWord_NonNegetive = "or" | "and"
-	type SimpleQueryConjunctionWord = SimpleQueryConjunctionWord_NonNegetive | "not"
-	type QueryConjunctionWord = SimpleQueryConjunctionWord | "not_or" | "not_and"
+	export type SimpleQueryConjunctionWord_NonNegetive = "or" | "and"
+	export type SimpleQueryConjunctionWord = SimpleQueryConjunctionWord_NonNegetive | "not"
+	export type QueryConjunctionWord = SimpleQueryConjunctionWord | "not_or" | "not_and"
 
-	interface QueryComparatorLiteralObject {
+	export interface QueryComparatorLiteralObject {
 		between: any | any[]
 		not_between: any | any[]
 		like: any | any[]
@@ -91,7 +91,7 @@ declare namespace FxSqlQueryComparator {
 		}
 	}
 
-	type ComparatorHash = {
+	export type ComparatorHash = {
 		between: FxSqlQueryComparatorFunction.between
 		not_between: FxSqlQueryComparatorFunction.not_between
 		like: FxSqlQueryComparatorFunction.like
@@ -106,47 +106,47 @@ declare namespace FxSqlQueryComparator {
 		not_in: FxSqlQueryComparatorFunction.not_in
 	}
 
-	type ComparatorNameType = keyof ComparatorHash
+	export type ComparatorNameType = keyof ComparatorHash
 	// just compatible
-	type ComparatorNames = ComparatorNameType
+	export type ComparatorNames = ComparatorNameType
 
-	type QueryComparatorType =
+	export type QueryComparatorType =
 		ComparatorNameType
 		| 'sql'
 }
 
-declare namespace FxSqlQueryComparatorFunction {
-	interface between {
+export namespace FxSqlQueryComparatorFunction {
+	export interface between {
 		(a: string, b: string): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface not_between {
+	export interface not_between {
 		(a: string, b: string): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface like {
+	export interface like {
 		(expr: FxSqlQueryComparator.QueryComparatorExprType): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface not_like {
+	export interface not_like {
 		(expr: FxSqlQueryComparator.QueryComparatorExprType): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface eq {
+	export interface eq {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface ne {
+	export interface ne {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface gt {
+	export interface gt {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface gte {
+	export interface gte {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface lt {
+	export interface lt {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface lte {
+	export interface lte {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
-	interface not_in {
+	export interface not_in {
 		(v: any): FxSqlQueryComparator.QueryComparatorObject
 	}
 }

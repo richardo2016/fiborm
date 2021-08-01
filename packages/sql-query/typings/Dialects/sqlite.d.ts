@@ -1,3 +1,3 @@
-/// <reference path="../../src/@types/index.d.ts" />
+import { FxSqlQueryDialect } from "../Typo/Dialect";
 declare const Dialect: FxSqlQueryDialect.Dialect;
 export = Dialect;

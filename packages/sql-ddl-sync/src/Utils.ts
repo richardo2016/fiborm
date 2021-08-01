@@ -1,6 +1,6 @@
 /// <reference types="@fibjs/types" />
 
-import { Dialects } from '@fiborm/sql-query';
+import { Dialects, FxSqlQueryDialect } from '@fiborm/sql-query';
 
 import type { FxDbDriverNS } from "../../db-driver";
 

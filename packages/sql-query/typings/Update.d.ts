@@ -1,5 +1,9 @@
-/// <reference path="../src/@types/index.d.ts" />
-export declare class UpdateQuery implements FxSqlQuery.ChainBuilder__Update {
+import { FxSqlQuerySql } from "./Typo/Sql";
+import { FxSqlQuery } from "./Typo/Query";
+import { FxSqlQueryDialect } from "./Typo/Dialect";
+import { FxSqlQuerySubQuery } from "./Typo/SubQuery";
+import { FxSqlQueryChainBuilder } from "./Typo/Query-ChainBuilder";
+export declare class UpdateQuery implements FxSqlQueryChainBuilder.ChainBuilder__Update {
     private Dialect;
     private opts;
     private sql;

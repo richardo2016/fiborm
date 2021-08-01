@@ -1,11 +1,17 @@
-/// <reference path="./@types/index.d.ts" />
-
 import Knex   = require('@fiborm/knex');
 import { get_table_alias } from "./Helpers";
 import Helpers = require('./Helpers');
 import Where   = require("./Where");
 
-export class SelectQuery implements FxSqlQuery.ChainBuilder__Select {
+import { FxSqlAggregation } from './Typo/Aggregation';
+import { FxSqlQueryDialect } from './Typo/Dialect';
+import { FxSqlQueryChainBuilder } from './Typo/Query-ChainBuilder';
+import { FxSqlQuerySql } from './Typo/Sql';
+import { FxSqlQuery } from "./Typo/Query";
+import { FxSqlQueryHelpler } from './Typo/Helper';
+import { FxSqlQuerySubQuery } from "./Typo/SubQuery"
+
+export class SelectQuery implements FxSqlQueryChainBuilder.ChainBuilder__Select {
 	Dialect: FxSqlQueryDialect.Dialect
 
 	private sql: FxSqlQuerySql.SqlQueryChainDescriptor = {
@@ -18,18 +24,18 @@ export class SelectQuery implements FxSqlQuery.ChainBuilder__Select {
 	}
 
 	private _aggregation_functions: {[key: string]: Function} = {}
-	private fun_stack: FxSqlQuery.SupportedAggregationFunction[] = []
+	private fun_stack: FxSqlAggregation.SupportedAggregationFunction[] = []
 
 	private get_aggregate_fun (fun: string) {
 		if (this._aggregation_functions[fun])
 			return this._aggregation_functions[fun]
 
 		const func = this._aggregation_functions[fun] = (
-			...columns: FxSqlQuery.ChainBuilder__SelectAggregationFunColumnArg
+			...columns: FxSqlQueryChainBuilder.ChainBuilder__SelectAggregationFunColumnArg
 		) => {
 			fun = fun.toUpperCase()
 			if (columns.length === 0) {
-				this.fun_stack.push(fun as FxSqlQuery.SupportedAggregationFunction);
+				this.fun_stack.push(fun as FxSqlAggregation.SupportedAggregationFunction);
 				return this;
 			}
 
@@ -41,7 +47,7 @@ export class SelectQuery implements FxSqlQuery.ChainBuilder__Select {
 			var alias = (columns.length > 1 && typeof columns[columns.length - 1] == "string" ? columns.pop() : null) as string;
 
 			if (columns.length && Array.isArray(columns[0])) {
-				const first = columns[0] as FxSqlQuery.ChainBuilder__SelectAggregationFunColumnArg
+				const first = columns[0] as FxSqlQueryChainBuilder.ChainBuilder__SelectAggregationFunColumnArg
 				columns = first.concat(
 					columns.slice(1)
 				);
@@ -538,7 +544,7 @@ function filterJoinOperator (
 }
 
 function buildObjectTypeSelectItem (
-	this: FxSqlQuery.ChainBuilder__Select,
+	this: FxSqlQueryChainBuilder.ChainBuilder__Select,
 	knexSqlBuilder: Knex.KnexNS.QueryBuilder,
 	sql_select_obj: FxSqlQuerySql.SqlSelectFieldItemDescriptor,
 	single_query: boolean,

@@ -1,24 +1,26 @@
-/// <reference path="Helper.d.ts" />
-/// <reference path="Dialect.d.ts" />
-/// <reference path="Query.d.ts" />
-/// <reference path="Sql.d.ts" />
-/// <reference path="Field.d.ts" />
+import { FxSqlQuery } from "./Query"
+import { FxSqlQuerySql } from "./Sql"
+import { FxSqlAggregation } from "./Aggregation"
+import { FxSqlQueryDialect } from "./Dialect"
+import { FxSqlQueryColumns } from "./Field"
+import { FxSqlQuerySubQuery } from "./SubQuery"
+import { FxSqlQueryHelpler } from "./Helper"
 
-declare namespace FxSqlQuery {
-	type QueryWhereConditionPayloadUnit = FxSqlQuerySql.DetailedQueryWhereCondition | string | null
+export namespace FxSqlQueryChainBuilder {
+	export type QueryWhereConditionPayloadUnit = FxSqlQuerySql.DetailedQueryWhereCondition | string | null
 
-	interface ChainBuilderOptions extends QueryOptions {}
+	export interface ChainBuilderOptions extends FxSqlQuery.QueryOptions {}
 
-	interface ChainBuilder {
+	export interface ChainBuilder {
 		build(): string
 	}
 
-	interface ChainBuilderPaginationMixin {
+	export interface ChainBuilderPaginationMixin {
 		offset(offset: number): this
 		limit(limit: number|string): this
 	}
 
-	interface ChainBuilderSortMixin {
+	export interface ChainBuilderSortMixin {
 		/**
 		 *
 		 * @param column
@@ -33,9 +35,9 @@ declare namespace FxSqlQuery {
 		order(column: FxSqlQuery.OrderNormalizedResult[0], dir?: FxSqlQuery.OrderNormalizedResult[1]): this
 	}
 
-	type ChainBuilder__SelectAggregationFunColumnArg = (string | string[])[]
-	interface ChainBuilder__Select
-		extends ChainBuilder, FxSqlQuery.SupportedAggregationsMixin, ChainBuilderPaginationMixin, ChainBuilderSortMixin
+	export type ChainBuilder__SelectAggregationFunColumnArg = (string | string[])[]
+	export interface ChainBuilder__Select
+		extends ChainBuilder, FxSqlAggregation.SupportedAggregationsMixin, ChainBuilderPaginationMixin, ChainBuilderSortMixin
 	{
 		Dialect: FxSqlQueryDialect.Dialect
 
@@ -76,12 +78,12 @@ declare namespace FxSqlQuery {
 
 		[extra: string]: any
 	}
-	interface ChainBuilder__Insert extends ChainBuilder {
+	export interface ChainBuilder__Insert extends ChainBuilder {
 		into(table: string): this | ChainBuilder__Insert
 		set(values: FxSqlQuerySql.DataToSet): this | ChainBuilder__Insert
 	}
 
-	interface ChainBuilder__Create extends ChainBuilder {
+	export interface ChainBuilder__Create extends ChainBuilder {
 		table(table: string): this | ChainBuilder__Create
 		field(table: string, type: FxSqlQueryDialect.DialectFieldType): this | ChainBuilder__Create
 
@@ -91,16 +93,16 @@ declare namespace FxSqlQuery {
 		}
 	}
 
-	interface ChainBuilder__Update extends ChainBuilder {
+	export interface ChainBuilder__Update extends ChainBuilder {
 		where: (...whereConditions: FxSqlQuerySubQuery.SubQueryBuildDescriptor['wheres'][]) => ChainBuilder__Update
 		into(table: string): this | ChainBuilder__Update
 		set(values: FxSqlQuerySql.DataToSet): this | ChainBuilder__Update
 	}
 
-	interface ChainBuilder__Remove
+	export interface ChainBuilder__Remove
 		extends ChainBuilder, ChainBuilderPaginationMixin
 	{
-		order(column: string, dir: QueryOrderDirection): this
+		order(column: string, dir: FxSqlQuery.QueryOrderDirection): this
 		where: (...whereConditions: FxSqlQuerySubQuery.SubQueryBuildDescriptor['wheres'][]) => this
 		from(table: string): this
 	}

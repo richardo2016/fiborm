@@ -1,9 +1,8 @@
 import * as mysql from './mysql'
 export { mysql }
 
-// @ts-ignore
-import * as _postgresql from './postgresql'
-export const postgresql = _postgresql as any as FxSqlQueryDialect.Dialect;
+// const postgresql = require('./postgresql')
+// export { postgresql }
 
 import * as sqlite from './sqlite'
 export { sqlite }

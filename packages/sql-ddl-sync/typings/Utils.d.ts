@@ -1,3 +1,4 @@
+import { FxSqlQueryDialect } from '@fiborm/sql-query';
 import type { FxDbDriverNS } from "../../db-driver";
 import type { FibOrmSqlDDLSync } from "./@types";
 import type { FibOrmSqlDDLSync__Collection } from "./@types/Collection";

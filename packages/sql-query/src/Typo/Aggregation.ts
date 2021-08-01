@@ -1,7 +1,7 @@
-declare namespace FxSqlQuery {
-	type AggregationFunction = Function
+export namespace FxSqlAggregation {
+	export type AggregationFunction = Function
 
-	interface SupportedAggregationsMixin {
+	export interface SupportedAggregationsMixin {
 		abs: Function
 		ceil: Function
 		floor: Function
@@ -30,5 +30,5 @@ declare namespace FxSqlQuery {
 		distinct: Function
 	}
 
-	type SupportedAggregationFunction = keyof SupportedAggregationsMixin
+	export type SupportedAggregationFunction = keyof SupportedAggregationsMixin
 }

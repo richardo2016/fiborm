@@ -1,14 +1,19 @@
-/// <reference path="./@types/index.d.ts" />
-
-import type { KnexNS } from '@fiborm/knex';
 import Helpers = require('./Helpers');
 import ComparatorsHash = require('./Comparators');
+
+import { FxSqlQuerySubQuery } from './Typo/SubQuery';
+import { FxSqlQuerySql } from './Typo/Sql';
+import { FxSqlQueryDialect } from './Typo/Dialect';
+import { FxSqlQueryChainBuilder } from './Typo/Query-ChainBuilder';
+import { FxSqlQueryComparator } from './Typo/Comparators';
+
+import { KnexNS } from '@fiborm/knex';
 
 export function build (
 	knexQueryBuilder: KnexNS.QueryBuilder,
 	Dialect: FxSqlQueryDialect.Dialect,
 	whereList: FxSqlQuerySubQuery.SubQueryBuildDescriptor[],
-	opts: FxSqlQuery.ChainBuilderOptions
+	opts: FxSqlQueryChainBuilder.ChainBuilderOptions
 ): void {
 	if (whereList.length === 0) {
 		return ;
@@ -61,7 +66,7 @@ function buildOrGroup(
 	knexQueryBuilder: KnexNS.QueryBuilder,
 	Dialect: FxSqlQueryDialect.Dialect,
 	where: FxSqlQuerySubQuery.SubQueryBuildDescriptor,
-	opts: FxSqlQuery.ChainBuilderOptions,
+	opts: FxSqlQueryChainBuilder.ChainBuilderOptions,
 	nextPrefixedOpWord?: FxSqlQueryComparator.QueryConjunctionWord,
 	innerInfo?: {
 		innerOperator?: SelectedWhereOperator,
@@ -155,7 +160,7 @@ function buildOrGroup(
 		const normalizedKey = getComparisonKey(Dialect, where.table, k);
 
 		let non_conj_where_conditem_value: FxSqlQuerySubQuery.NonConjunctionInputValue
-			= transformSqlComparatorLiteralObject(where_conditem_value, normalizedKey as any, where.wheres) || where_conditem_value;
+			= transformSqlComparatorLiteralObject(where_conditem_value, normalizedKey as string, where.wheres) || where_conditem_value;
 
 		if (isSqlComparatorPayload(non_conj_where_conditem_value)) {
 			op = non_conj_where_conditem_value.sql_comparator();
@@ -295,7 +300,7 @@ function buildExistsSqlFragments (
 	knexQueryBuilder: KnexNS.QueryBuilder,
 	Dialect: FxSqlQueryDialect.Dialect,
 	where: FxSqlQuerySubQuery.SubQueryBuildDescriptor,
-	opts: FxSqlQuery.ChainBuilderOptions
+	opts: FxSqlQueryChainBuilder.ChainBuilderOptions
 ) {
 	/* start of deal with case `whereExists` */
 	const link_table = where.exists.table_linked;

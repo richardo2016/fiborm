@@ -1,3 +1,5 @@
+import { FxSqlQueryComparator, FxSqlQueryComparatorFunction } from "./Typo/Comparators";
+
 type between = FxSqlQueryComparatorFunction.between
 function between (a: string, b: string) {
 	return createSpecialObject({ from: a, to: b }, 'between');

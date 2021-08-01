@@ -1,5 +1,10 @@
-/// <reference path="../src/@types/index.d.ts" />
-export declare class SelectQuery implements FxSqlQuery.ChainBuilder__Select {
+import { FxSqlQueryDialect } from './Typo/Dialect';
+import { FxSqlQueryChainBuilder } from './Typo/Query-ChainBuilder';
+import { FxSqlQuerySql } from './Typo/Sql';
+import { FxSqlQuery } from "./Typo/Query";
+import { FxSqlQueryHelpler } from './Typo/Helper';
+import { FxSqlQuerySubQuery } from "./Typo/SubQuery";
+export declare class SelectQuery implements FxSqlQueryChainBuilder.ChainBuilder__Select {
     private opts;
     Dialect: FxSqlQueryDialect.Dialect;
     private sql;

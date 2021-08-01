@@ -14,13 +14,15 @@ import { RemoveQuery } from "./Remove";
 import ComparatorsHash 	= require("./Comparators");
 export import Helpers     		= require('./Helpers');
 export import Dialects 		= require('./Dialects')
+import { FxSqlQuery } from './Typo/Query';
+import { FxSqlQueryDialect } from './Typo/Dialect';
 
 export const comparators = ComparatorsHash;
 export const Text: FxSqlQuery.TypedQueryObjectWrapper<"text"> = buildQueryType<"text">("text");
 
 function mountKnex (
-	this: FxSqlQuery.Class_Query,
-	Dialect: FxSqlQuery.Class_Query['Dialect']
+	this: Query,
+	Dialect: Query['Dialect']
 ) {
 	// TODO: use really fresh dialect rather than shallow copy.
 	this.Dialect = util.extend({}, Dialect);
@@ -79,11 +81,11 @@ export class Query implements FxSqlQuery.Class_Query {
 		this.escapeVal = this._proxyFn('escapeVal')
 	}
 
-	knex: import('@fiborm/knex').KnexInstance
+	knex: FxSqlQuery.Class_Query['knex'];
 
-	escape: FxSqlQuery.Class_Query['escape']
-	escapeId: FxSqlQuery.Class_Query['escapeId']
-	escapeVal: FxSqlQuery.Class_Query['escapeVal']
+	escape: FxSqlQueryDialect.Dialect['escape']
+	escapeId: FxSqlQueryDialect.Dialect['escapeId']
+	escapeVal: FxSqlQueryDialect.Dialect['escapeVal']
 
 	create()　{
 		return new CreateQuery(this.Dialect);
@@ -118,3 +120,5 @@ function buildQueryType<T = string, TD = any>(type: T): FxSqlQuery.TypedQueryObj
 		return o;
 	};
 }
+
+export * from './Typo/index';

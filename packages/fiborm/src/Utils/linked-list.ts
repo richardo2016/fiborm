@@ -12,8 +12,8 @@ interface LinkedNode<TP = any> {
 }
 
 export default class LinkedList<TP = any> {
-    private _head: LinkedNode<TP>
-    private _tail: LinkedNode<TP>
+    private _head: LinkedNode<TP> = null;
+    private _tail: LinkedNode<TP> = null;
     private _count: number = 0;
 
     get head (): LinkedNode<TP> { return this._head }

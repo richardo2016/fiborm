@@ -1,5 +1,10 @@
 module.exports = [
     {
+        name: 'fiborm',
+        _dirname: 'fiborm',
+        isTopPackage: true
+    },
+    {
         name: 'knex',
         _dirname: 'knex',
     },
@@ -19,10 +24,6 @@ module.exports = [
     {
         name: 'db-driver',
         _dirname: 'db-driver',
-    },
-    {
-        name: 'orm',
-        _dirname: 'orm',
     },
     {
         name: 'orm-hql',

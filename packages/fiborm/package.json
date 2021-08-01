@@ -1,5 +1,5 @@
 {
-	"name": "@fiborm/orm",
+	"name": "fiborm",
 	"version": "0.1.0",
 	"private": false,
 	"description": "",
@@ -11,9 +11,9 @@
 	],
 	"repository": {
 		"type": "https",
-		"url": "https://github.com/richardo2016/fiborm/tree/master/packages/orm"
+		"url": "https://github.com/richardo2016/fiborm/tree/master/packages/fiborm"
 	},
-	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/orm",
+	"homepage": "https://github.com/richardo2016/fiborm/tree/master/packages/fiborm",
 	"scripts": {
 		"build": "ftsc ./src/* --outDir ./lib",
 		"test": "fibjs test",

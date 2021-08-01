@@ -1,4 +1,4 @@
-import type { FibOrmSqlDDLSync__Dialect } from "../@types/Dialect";
+import type { FibOrmSqlDDLSync__Dialect } from "../Typo/Dialect";
 export declare const hasCollectionSync: FibOrmSqlDDLSync__Dialect.Dialect['hasCollectionSync'];
 export declare const hasCollection: FibOrmSqlDDLSync__Dialect.Dialect['hasCollection'];
 /**

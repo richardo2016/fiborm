@@ -1,8 +1,7 @@
-import { FxDbDriverNS } from '@fiborm/db-driver';
+import type { FxDbDriverNS } from "@fiborm/db-driver";
 
+import type { FibOrmSqlDDLSync__SQL } from './Typo/SQL';
 import { getSqlQueryDialect } from './Utils';
-
-import type { FibOrmSqlDDLSync__SQL } from './@types/SQL';
 
 export function CREATE_TABLE (
 	options: FibOrmSqlDDLSync__SQL.TableOptions,

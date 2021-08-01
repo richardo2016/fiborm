@@ -1,12 +1,11 @@
 import FxORMCore = require("@fiborm/orm-core");
 import SQL = require("../SQL");
-
 import { getSqlQueryDialect, arraify, filterPropertyDefaultValue } from '../Utils';
 
-import type { FibOrmSqlDDLSync__Column } from "../@types/Column";
-import type { FibOrmSqlDDLSync__DbIndex } from "../@types/DbIndex";
-import type { FibOrmSqlDDLSync__Dialect } from "../@types/Dialect";
-import type { FibOrmSqlDDLSync__Driver } from "../@types/Driver";
+import type { FibOrmSqlDDLSync__Column } from "../Typo/Column";
+import type { FibOrmSqlDDLSync__DbIndex } from "../Typo/DbIndex";
+import type { FibOrmSqlDDLSync__Dialect } from "../Typo/Dialect";
+import type { FibOrmSqlDDLSync__Driver } from "../Typo/Driver";
 
 const columnSizes = {
 	integer: {
@@ -584,20 +583,28 @@ function convertIndexRows(
 	const indexes = <FibOrmSqlDDLSync__DbIndex.DbIndexInfoHash>{};
 
 	for (let i = 0; i < rows.length; i++) {
-		if (rows[i].index_name == 'PRIMARY') {
+		const index_name = getObjectPropertyCaseInsensitive(rows[i], "index_name");
+		const non_unique = getObjectPropertyCaseInsensitive(rows[i], "non_unique");
+		const column_name= getObjectPropertyCaseInsensitive(rows[i], "column_name");
+
+		if (index_name == 'PRIMARY') {
 			continue;
 		}
-		if (!indexes.hasOwnProperty(rows[i].index_name)) {
-			indexes[rows[i].index_name] = {
+		if (!indexes.hasOwnProperty(index_name)) {
+			indexes[index_name] = {
 				columns: [],
-				unique: (rows[i].non_unique == 0)
+				unique: (non_unique == 0)
 			};
 		}
 
-		indexes[rows[i].index_name].columns.push(rows[i].column_name);
+		indexes[index_name].columns.push(column_name);
 	}
 
 	return indexes;
+}
+
+function getObjectPropertyCaseInsensitive(obj: any, key: string) {
+	return obj[Object.keys(obj).find((k) => k.toLowerCase() === key.toLowerCase())];
 }
 
 function colInfoBuffer2Str (col: FibOrmSqlDDLSync__Column.ColumnInfo__MySQL) {

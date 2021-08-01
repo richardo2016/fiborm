@@ -93,12 +93,12 @@ declare namespace FxHQL {
     }
 }
 
-declare module "@fxjs/orm-hql" {
+declare module "@fiborm/orm-hql" {
   const Singleton: FxHQL.Parser
   export = Singleton
 }
 
-declare module "@fxjs/orm-hql/lib/sql-parser" {
+declare module "@fiborm/orm-hql/lib/sql-parser" {
   const compiled: {
     lexer: nearley.Lexer | undefined
     ParserRules: nearley.CompiledRules

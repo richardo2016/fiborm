@@ -1,5 +1,5 @@
-import { FxDbDriverNS } from '@fiborm/db-driver';
-import type { FibOrmSqlDDLSync__SQL } from './@types/SQL';
+import type { FxDbDriverNS } from "@fiborm/db-driver";
+import type { FibOrmSqlDDLSync__SQL } from './Typo/SQL';
 export declare function CREATE_TABLE(options: FibOrmSqlDDLSync__SQL.TableOptions, db_type: FxDbDriverNS.DriverType): string;
 export declare function DROP_TABLE(options: FibOrmSqlDDLSync__SQL.TableOptions, db_type: FxDbDriverNS.DriverType): string;
 export declare function CHECK_TABLE_HAS_COLUMN(options: FibOrmSqlDDLSync__SQL.CheckTableHasColumnOptions, db_type: FxDbDriverNS.DriverType): string;

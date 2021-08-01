@@ -1,4 +1,4 @@
-import type { FxDbDriverNS } from '@fiborm/db-driver';
+import type { FxDbDriverNS } from "@fiborm/db-driver"
 
 export namespace FibOrmSqlDDLSync__Column {
     export interface PropertyDescriptor {}

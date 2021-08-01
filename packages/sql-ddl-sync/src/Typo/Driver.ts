@@ -1,7 +1,5 @@
-/// <reference types="@fiborm/orm-core" />
-
-import type { FxDbDriverNS } from "../../../db-driver";
-import type { FxOrmCoreCallbackNS } from "../../../orm-core";
+import type { FxDbDriverNS } from "@fiborm/db-driver";
+import type { FxOrmCoreCallbackNS } from "@fiborm/orm-core";
 import type { FibOrmSqlDDLSync__Column } from "./Column";
 import type { FibOrmSqlDDLSync__Dialect } from "./Dialect";
 import type { FibOrmSqlDDLSync__DbIndex } from "./DbIndex";

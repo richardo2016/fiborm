@@ -2,11 +2,11 @@
 
 import { Dialects, FxSqlQueryDialect } from '@fiborm/sql-query';
 
-import type { FxDbDriverNS } from "../../db-driver";
+import type { FxDbDriverNS } from "@fiborm/db-driver";
 
-import type { FibOrmSqlDDLSync } from "./@types";
-import type { FibOrmSqlDDLSync__Collection } from "./@types/Collection";
-import type { FibOrmSqlDDLSync__Column } from "./@types/Column";
+import type { FibOrmSqlDDLSync } from "./Typo/_common";
+import type { FibOrmSqlDDLSync__Collection } from "./Typo/Collection";
+import type { FibOrmSqlDDLSync__Column } from "./Typo/Column";
 
 export function logJson (group: string, detail: any) {
     let json = null;
@@ -76,7 +76,7 @@ export function filterSyncStrategy (
 }
 
 export function filterSuppressColumnDrop (
-    suppressColumnDrop: boolean, db_type: FibOrmSqlDDLSync.Sync['dbdriver']['type']
+    suppressColumnDrop: boolean, db_type: FxDbDriverNS.DriverType
 ) {
     if (db_type === 'sqlite')
         return true

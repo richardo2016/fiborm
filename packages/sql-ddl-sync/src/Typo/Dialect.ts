@@ -1,15 +1,14 @@
 /// <reference types="@fibjs/types" />
-/// <reference types="@fiborm/orm-core" />
-/// <reference types="@fiborm/db-driver" />
 
-import type { FibOrmSqlDDLSync } from "."
-import type { FxDbDriverNS } from "../../../db-driver"
-import type { FxOrmCoreCallbackNS } from "../../../orm-core"
+import type { FxOrmCoreCallbackNS } from "@fiborm/orm-core"
 import type { FibOrmSqlDDLSync__Collection } from "./Collection"
-import type { FibOrmSqlDDLSync__Column } from "./Column"
 import type { FibOrmSqlDDLSync__DbIndex } from "./DbIndex"
+import type { FibOrmSqlDDLSync } from "./_common"
 
-export namespace FibOrmSqlDDLSync__Dialect {
+import type { FxDbDriverNS } from '@fiborm/db-driver';
+import type { FibOrmSqlDDLSync__Column } from "./Column";
+
+export namespace FibOrmSqlDDLSync__Dialect{
     export type DialectType = 'mysql' | 'mssql' | 'sqlite' | 'postgresql'
 
     export interface DielectGetTypeOpts {

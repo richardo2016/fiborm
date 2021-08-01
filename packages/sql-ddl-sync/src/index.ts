@@ -1,17 +1,13 @@
-/// <reference types="@fiborm/orm-core" />
-
-
 import FxORMCore = require("@fiborm/orm-core");
 import util  = require('util')
-
 import { getSqlQueryDialect, logJson, getCollectionMapsTo_PropertyNameDict, filterPropertyDefaultValue, filterSyncStrategy, filterSuppressColumnDrop } from './Utils';
 
-import type { FibOrmSqlDDLSync } from "./@types";
-import type { FibOrmSqlDDLSync__Collection } from "./@types/Collection";
-import type { FibOrmSqlDDLSync__Column } from "./@types/Column";
-import type { FibOrmSqlDDLSync__Dialect } from "./@types/Dialect";
-import type { FibOrmSqlDDLSync__Driver } from "./@types/Driver";
-import type { FibOrmSqlDDLSync__DbIndex } from "./@types/DbIndex";
+import type { FibOrmSqlDDLSync__Collection } from "./Typo/Collection";
+import type { FibOrmSqlDDLSync__Column } from "./Typo/Column";
+import type { FibOrmSqlDDLSync__DbIndex } from "./Typo/DbIndex";
+import type { FibOrmSqlDDLSync__Dialect } from "./Typo/Dialect";
+import type { FibOrmSqlDDLSync__Driver } from "./Typo/Driver";
+import type { FibOrmSqlDDLSync } from "./Typo/_common";
 
 export {
 	FibOrmSqlDDLSync,
@@ -23,11 +19,13 @@ export {
 }
 
 export import Dialects = require('./Dialects');
+import type { FxOrmCoreCallbackNS } from '@fiborm/orm-core';
 
+import { FxDbDriverNS } from "@fiborm/db-driver";
 
 const noOp = () => {};
 
-export const dialect: FibOrmSqlDDLSync.ExportModule['dialect'] = function (name) {
+export function dialect (name: FibOrmSqlDDLSync__Dialect.DialectType): FibOrmSqlDDLSync__Dialect.Dialect {
 	if (!Dialects[name])
 		throw new Error(`no dialect with name '${name}'`)
 		
@@ -132,27 +130,27 @@ function getColumnTypeRaw (
 	};
 }
 
-export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
+export class Sync<ConnType = any> {
 	strategy: FibOrmSqlDDLSync.SyncCollectionOptions['strategy'] = 'soft'
 	/**
 	 * @description total changes count in this time `Sync`
 	 * @deprecated
 	 */
-	total_changes: FibOrmSqlDDLSync.Sync['total_changes']
+	total_changes: number
 	
 	readonly collections: FibOrmSqlDDLSync__Collection.Collection[]
 
-	readonly dbdriver: FibOrmSqlDDLSync.Sync['dbdriver']
-	readonly Dialect: FibOrmSqlDDLSync.Sync['Dialect']
+	readonly dbdriver: FxDbDriverNS.Driver<ConnType>
+	readonly Dialect: FibOrmSqlDDLSync__Dialect.Dialect
 	/**
 	 * @description customTypes
 	 */
-	readonly types: FibOrmSqlDDLSync.Sync['types']
+	readonly types: FibOrmSqlDDLSync__Driver.CustomPropertyTypeHash
 
 	private suppressColumnDrop: boolean
 	private debug: Exclude<FibOrmSqlDDLSync.SyncOptions['debug'], false>
 
-	constructor (options: FibOrmSqlDDLSync.SyncOptions) {
+	constructor (options: FibOrmSqlDDLSync.SyncOptions<ConnType>) {
 		const dbdriver = options.dbdriver
 
 		this.suppressColumnDrop = filterSuppressColumnDrop(options.suppressColumnDrop !== false, dbdriver.type)
@@ -168,7 +166,7 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 
 	[sync_method: string]: any
 	
-	defineCollection (collection_name: string, properties: FibOrmSqlDDLSync__Collection.Collection['properties']) {
+	defineCollection (collection_name: string, properties: FibOrmSqlDDLSync__Collection.Collection['properties']): this {
 		let idx = this.collections.findIndex(collection => collection.name === collection_name)
 		if (idx >= 0)
 			this.collections.splice(idx, 1)
@@ -181,16 +179,22 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 		return this;
 	}
 
-	findCollection (collection_name: string): null | FibOrmSqlDDLSync__Collection.Collection {
+	findCollection (collection_name: string): FibOrmSqlDDLSync__Collection.Collection {
 		return this.collections.find(collection => collection.name === collection_name) || null
 	}
 
-	defineType (type: string, proto: FibOrmSqlDDLSync__Driver.CustomPropertyType) {
+	defineType (type: string, proto: FibOrmSqlDDLSync__Driver.CustomPropertyType): this {
 		this.types[type] = proto;
 		return this;
 	}
 
-	createCollection (collection: FibOrmSqlDDLSync__Collection.Collection) {
+	/**
+	 * @description
+	 *  create collection in db if it doesn't exist, then sync all columns for it.
+	 * 
+	 * @param collection collection relation to create 
+	 */
+	createCollection <T = any> (collection: FibOrmSqlDDLSync__Collection.Collection): T {
 		const columns: string[] = [];
 
 		let keys: string[] = [];
@@ -230,10 +234,25 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 		return result_1;
 	}
 
+	/**
+	 * @description
+	 *  compare/diff properties between definition ones and the real ones,
+	 *  then sync column in definition but missing in the real
+	 * 
+	 * @param collection collection properties user provided 
+	 * @param opts
+	 *      - opts.columns: properties from user(default from db)
+	 *      - opts.strategy: (default soft) strategy when conflict between local and remote db, see details below
+	 * 
+	 * @strategy
+	 *      - 'soft': no change
+	 *      - 'mixed': add missing columns, but never change existed column in db
+	 *      - 'hard': modify existed columns in db
+	 */
 	syncCollection (
 		_collection: string | FibOrmSqlDDLSync__Collection.Collection,
 		opts?: FibOrmSqlDDLSync.SyncCollectionOptions
-	) {
+	): void {
 		const collection = typeof _collection === 'string' ? this.findCollection(_collection) : _collection;
 
 		if (!collection)
@@ -342,8 +361,6 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 		for (let k in collection.properties) {
 			prop = collection.properties[k];
 
-			const column_name = prop.mapsTo || k;
-
 			if (prop.unique) {
 				let mixed_arr_unique: (string | true)[] = prop.unique as string[]
 				if (!Array.isArray(prop.unique)) {
@@ -355,7 +372,7 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 						indexes.push({
 							name    : getIndexName(collection, prop, this.dbdriver.type),
 							unique  : true,
-							columns : [ column_name ]
+							columns : [ k ]
 						});
 					} else {
 						found = false;
@@ -363,7 +380,7 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 						for (let j = 0; j < indexes.length; j++) {
 							if (indexes[j].name == mixed_arr_unique[i]) {
 								found = true;
-								indexes[j].columns.push(column_name);
+								indexes[j].columns.push(k);
 								break;
 							}
 						}
@@ -372,7 +389,7 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 							indexes.push({
 								name    : mixed_arr_unique[i] as string,
 								unique  : true,
-								columns : [ column_name ]
+								columns : [ k ]
 							});
 						}
 					}
@@ -457,7 +474,15 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 		}
 	}
 
-	sync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
+	/**
+	 * @description
+	 *  sync all collections to db (if not existing), with initializing ones' properties.
+	 * 
+	 * @callbackable
+	 */
+	sync (cb: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>): void
+	sync (): FibOrmSqlDDLSync.SyncResult
+	sync (cb?: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
 		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FibOrmSqlDDLSync.SyncResult>(
 			() => {
 				this.total_changes = 0;
@@ -473,7 +498,16 @@ export class Sync<ConnType = any> implements FibOrmSqlDDLSync.Sync<ConnType> {
 		return exposedErrResults.result;
 	};
 	
-	forceSync (cb?: FxORMCore.FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
+	/**
+	 * @description
+	 *  sync all collections to db whatever it existed,
+	 *  with sync ones' properties whatever the property existed.
+	 * 
+	 * @callbackable
+	 */
+	forceSync (cb: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>): void
+	forceSync (): FibOrmSqlDDLSync.SyncResult
+	forceSync (cb?: FxOrmCoreCallbackNS.ExecutionCallback<FibOrmSqlDDLSync.SyncResult>) {
 		const exposedErrResults = FxORMCore.Utils.exposeErrAndResultFromSyncMethod<FibOrmSqlDDLSync.SyncResult>(
 			() => {
 				this.total_changes = 0;

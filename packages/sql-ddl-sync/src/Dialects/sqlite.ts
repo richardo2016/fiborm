@@ -3,9 +3,9 @@ import SQL = require("../SQL");
 
 import { getSqlQueryDialect, arraify, filterPropertyDefaultValue } from '../Utils';
 
-import type { FibOrmSqlDDLSync__Dialect } from "../@types/Dialect";
-import type { FibOrmSqlDDLSync__Column } from "../@types/Column";
-import type { FibOrmSqlDDLSync__Driver } from "../@types/Driver";
+import type { FibOrmSqlDDLSync__Column } from "../Typo/Column";
+import type { FibOrmSqlDDLSync__Dialect } from "../Typo/Dialect";
+import type { FibOrmSqlDDLSync__Driver } from "../Typo/Driver";
 
 // @see https://www.sqlite.org/lang_altertable.html
 export const hasCollectionSync: FibOrmSqlDDLSync__Dialect.Dialect['hasCollectionSync'] = function (
